@@ -1,4 +1,7 @@
-" ===== Init ===== "
+" ============================================
+" =================== Init ===================
+" ============================================
+
 syntax enable
 set textwidth=79
 
@@ -7,11 +10,18 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" ===== Plug-in ===== "
+" ============================================
+" ================= Plug-in ==================
+" ============================================
+
 call plug#begin()
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 call plug#end()
 
-" ===== Visual ===== "
+" ============================================
+" ================= Visual ===================
+" ============================================
+
 " Allow color schemes to do bright colors without forcing bold.
 if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
   set t_Co=16
@@ -26,7 +36,10 @@ colorscheme solarized
 " show line numbers
 set number
 
-" ===== Backup ===== "
+" ============================================
+" ================= Backup ===================
+" ============================================
+
 set backup
 set backupdir=~/.vimtmp/backup
 set directory=~/.vimtmp/temp
@@ -40,9 +53,28 @@ if version >= 700
     silent !mkdir -p ~/.vimtmp/undo
 endif
 
-" ===== Actions ===== "
+" ============================================
+" ================= Actions ==================
+" ============================================
+
 "delete automaticaly the trailing whitespaces when :w
 autocmd BufWritePre * :%s/\s\+$//e
 
 " fix backspace problem
 set backspace=start,eol,indent
+
+" Setting called autowrite that writes
+" the content of the file automatically if you call :make or :GoBuild
+set autowrite
+
+" ============================================
+" ================= Bindings =================
+" ============================================
+
+" ================ Go conf ===================
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
