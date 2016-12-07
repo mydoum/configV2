@@ -3,6 +3,7 @@
 
 # Only config files accepted
 !.vimrc
+!.vim/
 !.vim/*
 !.bash_profile
 !.gitignore
