@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Only config files accepted
+!.vimrc
+!.vim/*
+!.bash_profile
+!.gitignore
