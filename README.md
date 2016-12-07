@@ -10,3 +10,13 @@ and put it in the "autoload" directory.
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
+
+* Git clone
+* Copy the .vimrc to ~/
+
+```
+… then run the following in Vim:
+:source %
+:PlugInstall
+```
+
