@@ -36,7 +36,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 # ============================================
-# 2. TERMINAL ALIASES
+# 2. MAKE TERMINAL A BETTER WORLD
 # ============================================
 
 # command aliases
@@ -52,6 +52,12 @@ alias grep='grep --color=auto'
 alias mv='mv -iv'
 alias less='less -FSRXc'
 alias diff='colordiff'
+
+# Activate the bash-completion which autocomplete argument and not
+# only application names
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+	. $(brew --prefix)/etc/bash_completion
+fi
 
 # ============================================
 #   3. FUNCTIONS

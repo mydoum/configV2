@@ -16,5 +16,6 @@
     ac = !git add . && git commit -am
     rao = remote add origin
     l = reflog show
+    cm = commit -m
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
