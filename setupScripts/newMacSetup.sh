@@ -2,6 +2,44 @@
 
 function mainScript() {
 
+    function installHomebrewPackages() {
+        unset LISTINSTALLED INSTALLCOMMAND RECIPES
+
+        notice "Checking for Homebrew packages to install..."
+
+        checkTaps
+
+        LISTINSTALLED="brew list"
+        INSTALLCOMMAND="brew install"
+
+        RECIPES=(
+          autoconf
+          automake
+          bash
+          bash-completion
+          colordiff
+          coreutils           # Reimplementation of basic commands (ls, cd...)
+          git
+          git-extras
+          git-flow
+          libtool
+          mackup              # Helps to save applications configuration
+          node
+          openssl
+          p7zip               # 7z from independant
+          shellcheck          # Bash linter
+          sl                  # Locomotive
+          ssh-copy-id
+          sqlite
+          tldr                # Better man pages
+          tree
+        )
+
+        doInstall
+
+        success "Done installing Homebrew packages"
+    }
+
     function installCommandLineTools() {
         notice "Checking for Command Line Tools..."
 
@@ -243,6 +281,7 @@ function mainScript() {
 	installHomebrew
 	checkTaps
     installXcode
+    installHomebrewPackages
 }
 
 function seek_confirmation() {

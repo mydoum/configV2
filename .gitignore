@@ -10,3 +10,4 @@
 !.gitignore
 !./setupScripts/
 !./setupScripts/*
+.vim/.netrwhist
