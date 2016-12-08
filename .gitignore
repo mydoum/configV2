@@ -11,3 +11,4 @@
 !./setupScripts/
 !./setupScripts/*
 .vim/.netrwhist
+!.gitconfig

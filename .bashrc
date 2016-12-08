@@ -53,11 +53,6 @@ alias mv='mv -iv'
 alias less='less -FSRXc'
 alias diff='colordiff'
 
-# git
-alias gst='git status -s'
-# git ac "Message"
-alias gac='git add . && git commit -am'
-
 # ============================================
 #   3. FUNCTIONS
 # ============================================
