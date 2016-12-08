@@ -1,17 +1,32 @@
+" ---------------------------------------------------------------------------
+
+" Sections:
+"   1. Text format
+"   2. Plug-in
+"   3. Visual
+"   4. Backup
+"   5. Actions
+"   6. Bindings
+
+" ---------------------------------------------------------------------------
+
 " ============================================
-" =================== Init ===================
+"   1. TEXT FORMAT
 " ============================================
 
-syntax enable
 set textwidth=79
 
-" tab into spaces
+" Tab into spaces
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
+"Format the file from 2 spaces to 4 spaces
+command Format %s/^\s*/&&
+
+
 " ============================================
-" ================= Plug-in ==================
+"   2. PLUG-IN
 " ============================================
 
 call plug#begin()
@@ -19,8 +34,9 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 call plug#end()
 
 " ============================================
-" ================= Visual ===================
+"   3. VISUAL
 " ============================================
+syntax enable
 
 " Allow color schemes to do bright colors without forcing bold.
 if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
@@ -37,7 +53,7 @@ colorscheme solarized
 set number
 
 " ============================================
-" ================= Backup ===================
+"   4. BACKUP
 " ============================================
 
 set backup
@@ -54,7 +70,7 @@ if version >= 700
 endif
 
 " ============================================
-" ================= Actions ==================
+"   5. ACTIONS
 " ============================================
 
 "delete automaticaly the trailing whitespaces when :w
@@ -68,7 +84,7 @@ set backspace=start,eol,indent
 set autowrite
 
 " ============================================
-" ================= Bindings =================
+"   6. BINDINGS
 " ============================================
 
 " ================ Go conf ===================
