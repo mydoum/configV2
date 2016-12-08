@@ -1,22 +1,142 @@
-#PATH
+# ---------------------------------------------------------------------------
+
+# Sections:
+# 1. Environment Configuration
+# 2. Make Terminal Better (remapping defaults and adding functionality)
+# 3. Functions
+# 4. Process Management
+# 5. Networking
+# 6. Languages configuration
+
+# ---------------------------------------------------------------------------
+
+# ============================================
+# 1. ENVIRONMENT CONFIGURATION
+# ============================================
+
 export PATH=/usr/local/bin:/usr/local/sbin:/opt/gccgo/bin:$PATH:$GOPATH/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/sbin
 
+# prompt & colors
+export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+export CLICOLOR=1
+export PS2="continue-> "
+export PS4='\[\e[35m\]$0-l.$LINENO:\[\e[m\]  '
+
+# LESS man page colors (makes Man pages more readable).
+# from tldp.org
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+# fix tmux
+[ -n "$TMUX" ] && export TERM=screen-256color
+
+# ============================================
+# 2. TERMINAL ALIASES
+# ============================================
+
 # command aliases
-alias server='ssh user@***.***.***.***'
+alias server='ssh alonso@5.135.180.173'
 alias path='echo -e ${PATH//:/\\n}'
 alias l='ls -GFh'
 alias la='ls -a'
-alias ll='ls -lv'
+alias ll='ls -lvh'
 alias tree='tree -C'
 alias untar='tar -zxvf'
-alias mkdir='mkdir -p'
+alias mkdir='mkdir -pv'
+alias grep='grep --color=auto'
+alias mv='mv -iv'
+alias less='less -FSRXc'
+
+# ============================================
+#   3. FUNCTIONS
+# ============================================
+
+cd() { builtin cd "$@"; ll; }
+mkcd() { mkdir -p $1; cd $1; }
+# Man should be replaced by man on linux
+man() { Man $1 | less; }
+# function to replace $CURR if you do often more than one command
+curr() { cd /Users/alonso/Documents/study/All/java/2015; }
+
+# extract:  Extract most know archives with one command
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+# Searching
+ff () { /usr/bin/find . -name "$@" ; }      # ff:       Find file under the current directory
+ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
+ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+
+killport () { kill -9 $(lsof -ti :$1) ;}	# killport:	Kill the application listening on this specific port
+
+# ============================================
+#   4. PROCESS MANAGEMENT
+# ============================================
+
+# cpuHogs:  Find CPU hogs
+alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
+
+# Real time monitoring
+alias monitor='top -R -F -s 10 -o rsize -s 2'
+
+# List processes owned by my user
+my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+
+# ============================================
+#   5. NETWORKING
+# ============================================
+
+# Public facing IP Address
+alias myip='curl ip.appspot.com'
+
+# Display open TCP sockets
+alias lsock='sudo /usr/sbin/lsof -nP | grep TCP'
+
+# Useful information
+ii() {
+    echo -e "\nYou are logged on ${RED}$HOST"
+    echo -e "\nAdditionnal information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+    echo -e "\n${RED}Current network location :$NC " ; scselect
+    echo -e "\n${RED}Public facing IP Address :$NC " ;myip
+    #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+    echo
+}
+
+# ============================================
+#   6. LANGUAGES CONFIGURATION
+# ============================================
 
 # ============================================
 # ================ Bash conf =================
 # ============================================
 
 alias sourceb='source ~/.bash_profile'
-alias vimbash='vim ~/.bash_profile'
+alias vimbash='vim ~/.bashrc'
 
 # ============================================
 # ================ NodeJS conf ===============
@@ -99,42 +219,3 @@ function stop(){
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/shims:$PATH"
 
-# ============================================
-# ================ FUNCTIONS =================
-# ============================================
-
-# functions
-function mkcd(){
-    mkdir $1
-    cd $1
-}
-
-function man(){
-    man $1 | less
-}
-
-# function to replace $CURR if you do often more than one command
-function curr(){
-    cd /Users/alonso/Documents/study/All/java/2015
-}
-
-# ============================================
-# ================ Prompt & Shell ============
-# ============================================
-
-# prompt & colors
-export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
-export CLICOLOR=1
-
-# LESS man page colors (makes Man pages more readable).
-# from tldp.org
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
-
-# fix tmux
-[ -n "$TMUX" ] && export TERM=screen-256color
