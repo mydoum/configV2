@@ -1,4 +1,14 @@
 #! /bin/bash
+###############################################################################
+# CREDIT
+# This setup files have been mainly inspired by
+# [NathanielLandau](https://github.com/natelandau/shell-scripts)
+###############################################################################
+###############################################################################
+# osx.sh
+# This script is only for OSX, it installs your favorite applications through
+# homebrew, hombrew cask and mas
+###############################################################################
 
 function mainScript() {
 
@@ -21,7 +31,6 @@ function mainScript() {
           coreutils           # Reimplementation of basic commands (ls, cd...)
           git
           git-extras
-          git-flow
           libtool
           mackup              # Helps to save applications configuration
           node
