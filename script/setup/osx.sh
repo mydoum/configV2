@@ -48,11 +48,84 @@ function mainScript() {
           sqlite
           tldr                # Better man pages
           tree
+          vim
         )
 
+        # for item in "${RECIPES[@]}"; do
+        #   info "$item"
+        # done
         doInstall
 
         success "Done installing Homebrew packages"
+    }
+
+    function installCaskApps() {
+        unset LISTINSTALLED INSTALLCOMMAND RECIPES
+
+        notice "Checking for casks to install..."
+
+        checkTaps
+
+        LISTINSTALLED="brew cask list"
+        INSTALLCOMMAND="brew cask install --appdir=/Applications"
+        RECIPES=(
+          alfred
+          android-studio
+          andy
+          anki
+          docker
+          docker-toolbox
+          firefox
+          flux
+          google-chrome
+          intellij-idea
+          iterm2
+          java
+          karabiner
+          phpstorm
+          pycharm
+          qlcolorcode       # quicklook Syntax code
+          qlmarkdown
+          qlstephen         # quicklook README INSTALL Makefile
+          quicklook-csv
+          quicklook-json
+          skype
+          teamviewer
+          trickster
+          utorrent
+          virtualbox
+          vlc
+          webpquicklook
+          webstorm
+          wireshark
+        )
+
+        # for item in "${RECIPES[@]}"; do
+        #   info "$item"
+        # done
+        doInstall
+
+        success "Done installing cask apps"
+    }
+
+	function installAppStoreApps() {
+        unset LISTINSTALLED INSTALLCOMMAND RECIPES
+
+        notice "Checking for App Store apps to install..."
+
+        checkTaps
+
+        LISTINSTALLED="mas list"
+        INSTALLCOMMAND="mas install"
+        RECIPES=(
+          458034879 # Dash
+          406056744 # Evernote
+          823766827 # Onedrive
+          803453959 # Slack
+          )
+        doInstall
+
+        success "Done installing app store apps"
     }
 
     function installCommandLineTools() {
@@ -297,6 +370,8 @@ function mainScript() {
 	checkTaps
     installXcode
     installHomebrewPackages
+    installCaskApps
+    installAppStoreApps
 }
 
 

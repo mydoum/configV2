@@ -6,7 +6,7 @@
 
 # bash
 ln -fs $DOTFILES_DIR/bashrc ~/.bashrc
-ln -fs $DORFILES_DIR/bash_profile ~/.bash_profile
+ln -fs $DOTFILES_DIR/bash_profile ~/.bash_profile
 
 # vim
 ln -fs $DOTFILES_DIR/vimrc ~/.vimrc
