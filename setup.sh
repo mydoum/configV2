@@ -35,3 +35,6 @@ fi
 # Source and launch
 source $DOTFILE_SCRIPTS_DIR/setup/osx.sh
 
+# Linking
+source $DOTFILE_SCRIPTS_DIR/link/link.sh
+success "Linking done"

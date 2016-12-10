@@ -25,7 +25,7 @@ Everything I need to get setup on a new machine. Currently working with
    commonly used directories, and install dotfiles.
 
 ```sh
-curl -s https://raw.githubusercontent.com/Stratus3D/dotfiles/master/scripts/setup.sh | bash 2>&1 | tee ~/setup.log
+curl -s https://raw.githubusercontent.com/Stratus3D/dotfiles/master/setup.sh | bash 2>&1 | tee ~/setup.log
 ```
 
 
