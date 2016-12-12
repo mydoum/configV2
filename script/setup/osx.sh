@@ -37,6 +37,7 @@ function mainScript() {
           coreutils           # Reimplementation of basic commands (ls, cd...)
           git
           git-extras
+          lastpass-cli --with-pinentry --with-doc
           libtool
           mackup              # Helps to save applications configuration
           node
@@ -73,6 +74,7 @@ function mainScript() {
           android-studio
           andy
           anki
+          dash
           docker
           docker-toolbox
           firefox
@@ -81,7 +83,7 @@ function mainScript() {
           intellij-idea
           iterm2
           java
-          karabiner
+          karabiner-elements # Karabiner doesn't work on Sierra
           phpstorm
           pycharm
           qlcolorcode       # quicklook Syntax code
@@ -97,7 +99,6 @@ function mainScript() {
           vlc
           webpquicklook
           webstorm
-          wireshark
         )
 
         # for item in "${RECIPES[@]}"; do
@@ -118,7 +119,6 @@ function mainScript() {
         LISTINSTALLED="mas list"
         INSTALLCOMMAND="mas install"
         RECIPES=(
-          458034879 # Dash
           406056744 # Evernote
           823766827 # Onedrive
           803453959 # Slack
@@ -126,6 +126,32 @@ function mainScript() {
         doInstall
 
         success "Done installing app store apps"
+    }
+
+	function configureSSH() {
+        notice "Configuring SSH"
+
+        info "Checking for SSH key in ~/.ssh/id_rsa.pub, generating one if it doesn't exist"
+        [[ -f "${HOME}/.ssh/id_rsa.pub" ]] || ssh-keygen -t rsa
+
+        info "Copying public key to clipboard"
+        [[ -f "${HOME}/.ssh/id_rsa.pub" ]] && cat "${HOME}/.ssh/id_rsa.pub" | pbcopy
+
+        # Add SSH keys to Github
+        seek_confirmation "Add SSH key to Github?"
+        if is_confirmed; then
+          info "Paste the key into Github"
+
+          open https://github.com/account/ssh
+
+          seek_confirmation "Test Github Authentication via ssh?"
+            if is_confirmed; then
+              info "Note that even when successful, this will fail the script."
+              ssh -T git@github.com
+            fi
+        fi
+
+        success "SSH Configured"
     }
 
     function installCommandLineTools() {
@@ -372,6 +398,7 @@ function mainScript() {
     installHomebrewPackages
     installCaskApps
     installAppStoreApps
+    configureSSH
 }
 
 

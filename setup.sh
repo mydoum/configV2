@@ -16,19 +16,40 @@ DOTFILES_DIR=$HOME/dotfiles
 DOTFILE_SCRIPTS_DIR=$DOTFILES_DIR/script
 
 # ===========================================
-# Git
+# Xcode
 # ===========================================
+function installCommandLineTools() {
+    local osx_vers=$(sw_vers -productVersion | awk -F "." '{print $2}')
+    local cmdLineToolsTmp="${tmpDir}/.com.apple.dt.CommandLineTools.installondemand.in-progress"
+
+    # Create the placeholder file which is checked by the software update tool
+    # before allowing the installation of the Xcode command line tools.
+    touch "${cmdLineToolsTmp}"
+
+    # Find the last listed update in the Software Update feed with "Command Line Tools" in the name
+    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
+
+    softwareupdate -i "${cmd_line_tools}" -v
+
+    # Remove the temp file
+    if [ -f "${cmdLineToolsTmp}" ]; then
+        rm ${v} "${cmdLineToolsTmp}"
+    fi
+}
+
+if [[ ! "$(type -P gcc)" || ! "$(type -P make)" ]]; then
+    installCommandLineTools
+fi
+
+
 if [ ! -d $DOTFILES_DIR ]; then
     if hash git 2>/dev/null; then
         echo "Git is already installed. Cloning repository..."
         git clone git@github.com:mydoum/dotfiles.git $DOTFILES_DIR
     else
-        echo "Git is not installed. Installing it..."
-        #Since macport is by default installed, we use it
-        port selfupdate
-        port install git
-        git clone git@github.com:mydoum/dotfiles.git $DOTFILES_DIR
-        # TODO: Uninstall macport when homebrew is installed
+        echo "Git is not installed...Something is wrong, it should work
+        natively on OSX..."
+        return 1
     fi
 fi
 
