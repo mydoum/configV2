@@ -28,36 +28,17 @@ function mainScript() {
         LISTINSTALLED="brew list"
         INSTALLCOMMAND="brew install"
 
-        RECIPES=(
-          autoconf
-          automake
-          bash
-          bash-completion
-          colordiff
-          coreutils           # Reimplementation of basic commands (ls, cd...)
-          git
-          git-extras
-          lastpass-cli --with-pinentry --with-doc
-          libtool
-          mackup              # Helps to save applications configuration
-          node
-          openssl
-          p7zip               # 7z from independant
-          shellcheck          # Bash linter
-          sl                  # Locomotive
-          ssh-copy-id
-          sqlite
-          tldr                # Better man pages
-          tree
-          vim
-        )
-
+        source $DOTFILE_SCRIPTS_DIR/setup/recipes/10_osx_homebrew.sh
         # for item in "${RECIPES[@]}"; do
         #   info "$item"
         # done
-        doInstall
+        if doInstall; then
+            success "Done installing Homebrew packages"
+        else
+            verbose "All homebrew packages already installed"
+        fi
 
-        success "Done installing Homebrew packages"
+
     }
 
     function installCaskApps() {
@@ -104,9 +85,12 @@ function mainScript() {
         # for item in "${RECIPES[@]}"; do
         #   info "$item"
         # done
-        doInstall
+        if doInstall; then
+            success "Done installing cask apps"
+        else
+            verbose "All cask applications already installed"
+        fi
 
-        success "Done installing cask apps"
     }
 
 	function installAppStoreApps() {
@@ -123,9 +107,13 @@ function mainScript() {
           823766827 # Onedrive
           803453959 # Slack
           )
-        doInstall
 
-        success "Done installing app store apps"
+        if doInstall; then
+            success "Done installing app store apps"
+        else
+            verbose "All app store applications already installed"
+        fi
+
     }
 
 	function configureSSH() {
@@ -177,7 +165,7 @@ function mainScript() {
 
 			success "Command Line Tools installed"
 		else
-			info "Command Line Tools already installed"
+			verbose "Command Line Tools already installed"
         fi
 
     }
@@ -203,12 +191,11 @@ function mainScript() {
       		installHomebrewTaps
     		success "Homebrew installed"
 		else
-			info "Homebrew already installed"
+			verbose "Homebrew already installed"
     	fi
     }
 
 	function checkTaps() {
-    	verbose "Confirming we have required Homebrew taps"
     	if ! brew cask help &>/dev/null; then
     	  installHomebrewTaps
     	fi
@@ -268,7 +255,7 @@ function mainScript() {
     	    sudo xcodebuild -license accept
     	    success "XCode installed"
         else
-            info "XCode already installed"
+            verbose "XCode already installed"
     	fi
 
 	}
@@ -292,13 +279,17 @@ function mainScript() {
     	#
     	# Credit: https://github.com/cowboy/dotfiles
 
-
-
+        # to_install( RECIPES[*], LISTINSTALLED) list
+        # $1 : RECIPES[*] : Array -> All recipes expected to get
+        # $2 : LISTINSTALLED : String -> Get all installed recipes ex : brew list
+        # return : list : Array -> List which will be installed
     	function to_install() {
     	    local desired installed i desired_s installed_s remain
-    	    # Convert args to arrays, handling both space- and newline-separated lists.
+
+            # Convert args to list of elements separated by spaces
     	    read -ra desired < <(echo "$1" | tr '\n' ' ')
     	    read -ra installed < <(echo "$2" | tr '\n' ' ')
+
     	    # Sort desired and installed arrays.
     	    unset i; while read -r; do desired_s[i++]=$REPLY; done < <(
     	        printf "%s\n" "${desired[@]}" | sort
@@ -321,7 +312,8 @@ function mainScript() {
     	            continue
     	        fi
     	    fi
-    	    # If we installing from mas (mac app store), we need to dedupe the list AND
+    	    # If we installing from mas (mac app store), we need to
+            # dedupe the list AND
     	    # sign in to the app store
     	    if [[ $INSTALLCOMMAND =~ mas ]]; then
     	        # Lookup the name of the application being installed
@@ -334,8 +326,10 @@ function mainScript() {
     	    fi
     	}
 
+        list=($(to_install "${RECIPES[*]}" "$(${LISTINSTALLED})"))
+
     	# Log in to the Mac App Store if using mas
-    	if [[ $INSTALLCOMMAND =~ mas ]]; then
+    	if [[ $INSTALLCOMMAND =~ mas ]] && [[ list -ne "" ]]; then
     	    mas signout
     	    input "Please enter your Mac app store username: "
     	    read macStoreUsername
@@ -344,8 +338,6 @@ function mainScript() {
     	    echo ""
     	    mas signin $macStoreUsername "$macStorePass"
     	fi
-
-    	list=($(to_install "${RECIPES[*]}" "$(${LISTINSTALLED})"))
 
     	if [ ${#list[@]} -gt 0 ]; then
     	    seek_confirmation "Confirm each package before installing?"
@@ -381,6 +373,8 @@ function mainScript() {
     	            fi
     	        done
     	    fi
+        else
+            return 1 # Nothing to install
     	fi
     }
 
