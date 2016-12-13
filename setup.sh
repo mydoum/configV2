@@ -58,3 +58,6 @@ source $DOTFILE_SCRIPTS_DIR/setup/osx.sh
 
 # Linking
 source $DOTFILE_SCRIPTS_DIR/link/link.sh
+
+# SSD
+source $DOTFILE_SCRIPTS_DIR/setup/ssd.sh

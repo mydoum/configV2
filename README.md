@@ -20,13 +20,15 @@ Everything I need to get setup on a new machine. Currently only working with
 
 ## Installation
 
-#### Prerequisites
+### With git
 
-* `curl` - For the command below
-
-#### Installation Steps
-1. Run the `setup.sh`. This will install all the necessary software, setup
-   commonly used directories, and install dotfiles.
+```sh
+$ git clone https://github.com/mydoum/dotfiles.git ~/dotfiles
+$ cd ~/dotfiles
+$ chmod +x setup.sh
+$ ./setup.sh
+```
+### Remotely install using curl
 
 ```sh
 curl -s https://raw.githubusercontent.com/mydoum/dotfiles/master/setup.sh | bash 2>&1 | tee ~/setup.log
@@ -44,3 +46,10 @@ Softwares that I need for my day-to-day programming work.
 [1]: http://brew.sh
 [2]: http://caskroom.io
 [3]: https://github.com/mas-cli/mas
+
+### Resources
+
+I'm inspired by these dotfiles repos
+
+* [NathanielLandau](https://github.com/natelandau/shell-scripts)
+* [Cowboy](https://github.com/cowboy/dotfiles)
