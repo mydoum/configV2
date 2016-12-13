@@ -84,27 +84,30 @@ function mainScript() {
 	function configureSSH() {
         notice "Configuring SSH"
 
-        info "Checking for SSH key in ~/.ssh/id_rsa.pub, generating one if it doesn't exist"
-        [[ -f "${HOME}/.ssh/id_rsa.pub" ]] || ssh-keygen -t rsa
+        if [[ -f "${HOME}/.ssh/id_rsa.pub" ]]; then
+           verbose "A public rsa key already exist"
+        else
+            ssh-keygen -t rsa
+            success "A SSH key generated"
+        fi
 
-        info "Copying public key to clipboard"
-        [[ -f "${HOME}/.ssh/id_rsa.pub" ]] && cat "${HOME}/.ssh/id_rsa.pub" | pbcopy
 
         # Add SSH keys to Github
         seek_confirmation "Add SSH key to Github?"
         if is_confirmed; then
-          info "Paste the key into Github"
+          info "Copying the key to the clipboard"
+          [[ -f "${HOME}/.ssh/id_rsa.pub" ]] && cat "${HOME}/.ssh/id_rsa.pub" | pbcopy
 
           open https://github.com/account/ssh
 
           seek_confirmation "Test Github Authentication via ssh?"
-            if is_confirmed; then
-              info "Note that even when successful, this will fail the script."
-              ssh -T git@github.com
-            fi
+          if is_confirmed; then
+            info "Note that even when successful, this will fail the script."
+            ssh -T git@github.com
+          fi
+          success "Git SSH Configured"
         fi
 
-        success "SSH Configured"
     }
 
     function installCommandLineTools() {
