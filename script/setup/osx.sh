@@ -17,7 +17,6 @@ source $DOTFILE_SCRIPTS_DIR/colors.sh
 source $DOTFILE_SCRIPTS_DIR/confirmation.sh
 
 function mainScript() {
-
     function installHomebrewPackages() {
         unset LISTINSTALLED INSTALLCOMMAND RECIPES
 
@@ -37,8 +36,6 @@ function mainScript() {
         else
             verbose "All homebrew packages already installed"
         fi
-
-
     }
 
     function installCaskApps() {
@@ -50,38 +47,8 @@ function mainScript() {
 
         LISTINSTALLED="brew cask list"
         INSTALLCOMMAND="brew cask install --appdir=/Applications"
-        RECIPES=(
-          alfred
-          android-studio
-          andy
-          anki
-          dash
-          docker
-          docker-toolbox
-          firefox
-          flux
-          google-chrome
-          intellij-idea
-          iterm2
-          java
-          karabiner-elements # Karabiner doesn't work on Sierra
-          phpstorm
-          pycharm
-          qlcolorcode       # quicklook Syntax code
-          qlmarkdown
-          qlstephen         # quicklook README INSTALL Makefile
-          quicklook-csv
-          quicklook-json
-          skype
-          teamviewer
-          trickster
-          utorrent
-          virtualbox
-          vlc
-          webpquicklook
-          webstorm
-        )
 
+        source $DOTFILE_SCRIPTS_DIR/setup/recipes/20_osx_cask.sh
         # for item in "${RECIPES[@]}"; do
         #   info "$item"
         # done
@@ -90,7 +57,6 @@ function mainScript() {
         else
             verbose "All cask applications already installed"
         fi
-
     }
 
 	function installAppStoreApps() {
@@ -102,18 +68,17 @@ function mainScript() {
 
         LISTINSTALLED="mas list"
         INSTALLCOMMAND="mas install"
-        RECIPES=(
-          406056744 # Evernote
-          823766827 # Onedrive
-          803453959 # Slack
-          )
+
+        source $DOTFILE_SCRIPTS_DIR/setup/recipes/30_osx_app_store.sh
+        # for item in "${RECIPES[@]}"; do
+        #   info "$item"
+        # done
 
         if doInstall; then
             success "Done installing app store apps"
         else
             verbose "All app store applications already installed"
         fi
-
     }
 
 	function configureSSH() {
@@ -394,7 +359,6 @@ function mainScript() {
     installAppStoreApps
     configureSSH
 }
-
 
 # ==================================================================================
 #   .Entrypoint
