@@ -14,6 +14,7 @@
 
 DOTFILES_DIR=$HOME/dotfiles
 DOTFILE_SCRIPTS_DIR=$DOTFILES_DIR/script
+DOTFILE_SCRIPTS_OSX_DIR=$DOTFILE_SCRIPTS_DIR/setup
 
 # ===========================================
 # Xcode
@@ -54,10 +55,13 @@ if [ ! -d $DOTFILES_DIR ]; then
 fi
 
 # Source and launch
-source $DOTFILE_SCRIPTS_DIR/setup/osx.sh
+source $DOTFILE_SCRIPTS_OSX_DIR/osx.sh
 
 # Linking
 source $DOTFILE_SCRIPTS_DIR/link/link.sh
 
 # SSD
-source $DOTFILE_SCRIPTS_DIR/setup/ssd.sh
+source $DOTFILE_SCRIPTS_OSX_DIR/ssd.sh
+
+# OSX_DEFAULTS options
+source $DOTFILE_SCRIPTS_OSX_DIR/osx_defaults.sh

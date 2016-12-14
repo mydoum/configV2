@@ -157,7 +157,7 @@ alias vimbash='vim ~/.bashrc'
 # ============================================
 
 alias godebug='go build -gcflags "-N -l"'
-export GOPATH=$HOME/Documents/tmp/6.824
+export GOPATH=$HOME
 export GOROOT=/usr/local/go
 
 # ============================================
