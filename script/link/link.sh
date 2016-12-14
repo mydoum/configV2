@@ -8,6 +8,7 @@
 notice "Configuring Bash"
 ln -fs $DOTFILES_DIR/bashrc ~/.bashrc
 ln -fs $DOTFILES_DIR/bash_profile ~/.bash_profile
+ln -fs $DOTFILES_DIR/dircolors ~/.dircolors
 
 # vim
 notice "Configuring Vim"

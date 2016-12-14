@@ -17,10 +17,13 @@
 export PATH=/usr/local/bin:/usr/local/sbin:/opt/gccgo/bin:$PATH:$GOPATH/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/sbin
 
 # prompt & colors
-export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 export CLICOLOR=1
+export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 export PS2="continue-> "
 export PS4='\[\e[35m\]$0-l.$LINENO:\[\e[m\]  '
+
+# ls color
+test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
 
 # LESS man page colors (makes Man pages more readable).
 # from tldp.org
@@ -42,7 +45,10 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # command aliases
 alias server='ssh alonso@5.135.180.173'
 alias path='echo -e ${PATH//:/\\n}'
-alias l='ls -GFh'
+#gls --color allows to use  LSCOLOR
+#gls comes from coreutils
+alias ls='gls -F --color=auto'
+alias l='ls -Fh'
 alias la='ls -a'
 alias ll='ls -lvh'
 alias tree='tree -C'
