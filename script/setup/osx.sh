@@ -54,6 +54,12 @@ function mainScript() {
         # done
         if doInstall; then
             success "Done installing cask apps"
+
+            # Oversight needs to be installed with more rights
+            if ! open -Ra "Oversight"; then
+                open /usr/local/Caskroom/oversight/1.0.0/OverSight_Installer.app
+            fi
+
         else
             verbose "All cask applications already installed"
         fi

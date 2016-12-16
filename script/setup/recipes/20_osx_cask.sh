@@ -14,12 +14,13 @@ RECIPES=(
     intellij-idea
     iterm2
     java
-    karabiner-elements # Karabiner doesn't work on Sierra
+    karabiner-elements  # Karabiner doesn't work on Sierra
+    oversight           # Protect the use of webcam and micros
     phpstorm
     pycharm
-    qlcolorcode       # quicklook Syntax code
+    qlcolorcode         # quicklook Syntax code
     qlmarkdown
-    qlstephen         # quicklook README INSTALL Makefile
+    qlstephen           # quicklook README INSTALL Makefile
     quicklook-csv
     quicklook-json
     skype

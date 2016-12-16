@@ -36,4 +36,7 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 # Disable the crash reporter
 defaults write com.apple.CrashReporter DialogType -string "none"
 
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
 success "Done configuring the OSX default settings"
