@@ -33,15 +33,15 @@
 # with this program.  If not, see <http://www.perlfoundation.org/artistic_license_1_0>.
 
 # core {{{1
-BLK                   38;5;68
+BLK                   38;5;30
 CAPABILITY            38;5;17
 CHR                   38;5;113;1
-DIR                   38;5;30
+DIR                   38;5;68
 DOOR                  38;5;127
 EXEC                  38;5;208;1
 FIFO                  38;5;126
 FILE                  38;5;253
-LINK                  target
+LINK                  38;5;125
 MULTIHARDLINK         38;5;222;1
 # "NORMAL don't reset the bold attribute -
 # https://github.com/trapd00r/LS_COLORS/issues/11

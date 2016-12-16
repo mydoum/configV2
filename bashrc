@@ -16,7 +16,7 @@
 
 DEFAULTPATH=/usr/bin:/bin:/usr/sbin:/sbin
 BREWPATH=/usr/local/bin:/usr/local/sbin
-export PATH=$BREWPATH:$DEFAULTPATH:$GOPATH/bin
+export PATH=$DEFAULTPATH:$BREWPATH:$GOPATH/bin
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

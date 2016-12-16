@@ -34,4 +34,5 @@ if is_confirmed; then
           </dict>
         </plist>' | sudo tee /Library/LaunchDaemons/com.nullvision.noatime.plist
         sudo chown root:wheel /Library/LaunchDaemons/com.nullvision.noatime.plist
+    fi
 fi
