@@ -14,7 +14,21 @@
 # 1. ENVIRONMENT CONFIGURATION
 # ============================================
 
-export PATH=/usr/local/bin:/usr/local/sbin:/opt/gccgo/bin:$PATH:$GOPATH/bin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:/usr/sbin
+DEFAULTPATH=/usr/bin:/bin:/usr/sbin:/sbin
+BREWPATH=/usr/local/bin:/usr/local/sbin
+export PATH=$BREWPATH:$DEFAULTPATH:$GOPATH/bin
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# ================ Go conf ===================
+alias godebug='go build -gcflags "-N -l"'
+export GOPATH=$HOME
+export GOROOT=/usr/local/go
+
+# ============================================
+# 2. MAKE TERMINAL A BETTER WORLD
+# ============================================
 
 # prompt & colors
 export CLICOLOR=1
@@ -22,8 +36,6 @@ export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$
 export PS2="continue-> "
 export PS4='\[\e[35m\]$0-l.$LINENO:\[\e[m\]  '
 
-# ls color
-test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
 
 # LESS man page colors (makes Man pages more readable).
 # from tldp.org
@@ -38,19 +50,18 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # fix tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-# ============================================
-# 2. MAKE TERMINAL A BETTER WORLD
-# ============================================
-
-# command aliases
-alias server='ssh alonso@5.135.180.173'
-alias path='echo -e ${PATH//:/\\n}'
-#gls --color allows to use  LSCOLOR
-#gls comes from coreutils
+# ================ LS =================
+test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
 alias ls='gls -F --color=auto'
 alias l='ls -Fh'
 alias la='ls -a'
 alias ll='ls -lvh'
+
+# ============= Aliases ===============
+alias server='ssh alonso@5.135.180.173'
+alias path='echo -e ${PATH//:/\\n}'
+#gls --color allows to use  LSCOLOR
+#gls comes from coreutils
 alias tree='tree -C'
 alias untar='tar -zxvf'
 alias mkdir='mkdir -pv'
@@ -58,6 +69,9 @@ alias grep='grep --color=auto'
 alias mv='mv -iv'
 alias less='less -FSRXc'
 alias diff='colordiff'
+
+alias sourceb='source ~/.bash_profile'
+alias vimbash='vim ~/.bashrc'
 
 # Activate the bash-completion which autocomplete argument and not
 # only application names
@@ -144,12 +158,6 @@ ii() {
 #   6. LANGUAGES CONFIGURATION
 # ============================================
 
-# ============================================
-# ================ Bash conf =================
-# ============================================
-
-alias sourceb='source ~/.bash_profile'
-alias vimbash='vim ~/.bashrc'
 
 # ============================================
 # ================ NodeJS conf ===============
@@ -158,20 +166,13 @@ alias vimbash='vim ~/.bashrc'
 # export NODE_PATH=/usr/local/lib/node
 # export NODE_PATH=/usr/local/Cellar/node/7.0.0/bin/node
 
-# ============================================
-# ================ Go conf ===================
-# ============================================
-
-alias godebug='go build -gcflags "-N -l"'
-export GOPATH=$HOME
-export GOROOT=/usr/local/go
 
 # ============================================
 # ================ Java conf =================
 # ============================================
 
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
-export PATH=${PATH}:${JBOSS_HOME}/bin
+# export PATH=${PATH}:${JBOSS_HOME}/bin
 
 function tomcat(){
     /usr/local/Cellar/tomcat/8.0.27/bin/catalina run
@@ -186,14 +187,8 @@ function tomcat(){
 
 # added by Anaconda3 4.1.1 installer
 export PYTHONPATH=/Users/alonso/anaconda3/bin/python3.5
-export PATH="/Users/alonso/anaconda3/bin:$PATH"
+# export PATH="/Users/alonso/anaconda3/bin:$PATH"
 
-# ============================================
-# ================ Extra conf ================
-# ============================================
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 # ============================================
 # ================ POSTGRESQL ================
@@ -229,6 +224,6 @@ function stop(){
 # =================== Ruby ===================
 # ============================================
 
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/shims:$PATH"
+# eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/shims:$PATH"
 
