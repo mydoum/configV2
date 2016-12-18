@@ -12,6 +12,10 @@
 # It currently only works with OSX
 [[ "$OSTYPE" =~ ^darwin ]] || return 1
 
+# ====
+BITBUCKET_USER=mydoum
+# ====
+
 DOTFILES_DIR=$HOME/dotfiles
 DOTFILE_SCRIPTS_DIR=$DOTFILES_DIR/script
 DOTFILE_SCRIPTS_OSX_DIR=$DOTFILE_SCRIPTS_DIR/setup

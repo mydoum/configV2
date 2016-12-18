@@ -15,6 +15,7 @@ RECIPES=(
     iterm2
     java
     karabiner-elements  # Karabiner doesn't work on Sierra
+    mactex              # All elements needed to write in LateX
     oversight           # Protect the use of webcam and micros
     phpstorm
     pycharm

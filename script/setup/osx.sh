@@ -97,23 +97,29 @@ function mainScript() {
             success "A SSH key generated"
         fi
 
-
         # Add SSH keys to Github
         seek_confirmation "Add SSH key to Github?"
         if is_confirmed; then
           info "Copying the key to the clipboard"
-          [[ -f "${HOME}/.ssh/id_rsa.pub" ]] && cat "${HOME}/.ssh/id_rsa.pub" | pbcopy
+          [[ -f "${HOME}/.ssh/id_rsa.pub" ]] && cat "${HOME}/.ssh/id_rsa.pub" \
+              | pbcopy
 
           open https://github.com/account/ssh
 
-          seek_confirmation "Test Github Authentication via ssh?"
-          if is_confirmed; then
-            info "Note that even when successful, this will fail the script."
-            ssh -T git@github.com
-          fi
           success "Git SSH Configured"
         fi
 
+        # Add SSH keys to Bitbucket
+        seek_confirmation "Add SSH key to Bitbucket?"
+        if is_confirmed; then
+          info "Copying the key to the clipboard"
+          [[ -f "${HOME}/.ssh/id_rsa.pub" ]] && cat "${HOME}/.ssh/id_rsa.pub" \
+              | pbcopy
+
+          open https://bitbucket.org/account/user/${BITBUCKET_USER}/ssh-keys/
+
+          success "Bitbucket SSH Configured"
+        fi
     }
 
     function installCommandLineTools() {
