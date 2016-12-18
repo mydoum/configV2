@@ -11,6 +11,14 @@
 # ---------------------------------------------------------------------------
 
 # ============================================
+# 0. EXTRA NON OPEN CONFIGURATION
+# ============================================
+
+if [ -f ~/.bash_private ]; then
+   source ~/.bash_private
+fi
+
+# ============================================
 # 1. ENVIRONMENT CONFIGURATION
 # ============================================
 
@@ -58,7 +66,6 @@ alias la='ls -a'
 alias ll='ls -lvh'
 
 # ============= Aliases ===============
-alias server='ssh alonso@5.135.180.173'
 alias path='echo -e ${PATH//:/\\n}'
 #gls --color allows to use  LSCOLOR
 #gls comes from coreutils
