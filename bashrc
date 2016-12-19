@@ -24,7 +24,8 @@ fi
 
 DEFAULTPATH=/usr/bin:/bin:/usr/sbin:/sbin
 BREWPATH=/usr/local/bin:/usr/local/sbin
-export PATH=$DEFAULTPATH:$BREWPATH:$GOPATH/bin
+LATEXPATH=/Library/TeX/texbin
+export PATH=$DEFAULTPATH:$BREWPATH:$GOPATH/bin:$LATEXPATH
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

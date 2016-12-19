@@ -15,6 +15,7 @@
 " ============================================
 
 set textwidth=79
+set ruler
 
 " Tab into spaces
 set tabstop=4
