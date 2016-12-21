@@ -6,14 +6,14 @@
 "   3. Visual
 "   4. Backup
 "   5. Actions
-"   6. Bindings
+"   6. Spellchecker
+"   7. Bindings
 
 " ---------------------------------------------------------------------------
 
 " ============================================
 "   1. TEXT FORMAT
 " ============================================
-
 set textwidth=79
 set ruler
 
@@ -29,7 +29,6 @@ command Format %s/^\s*/&&
 " ============================================
 "   2. PLUG-IN
 " ============================================
-
 call plug#begin()
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 call plug#end()
@@ -56,7 +55,6 @@ set number
 " ============================================
 "   4. BACKUP
 " ============================================
-
 set backup
 set backupdir=~/.vimtmp/backup
 set directory=~/.vimtmp/temp
@@ -73,7 +71,6 @@ endif
 " ============================================
 "   5. ACTIONS
 " ============================================
-
 "delete automaticaly the trailing whitespaces when :w
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -85,7 +82,12 @@ set backspace=start,eol,indent
 set autowrite
 
 " ============================================
-"   6. BINDINGS
+"   6. SPELL CHECKER
+" ============================================
+set spelllang=fr
+
+" ============================================
+"   7. BINDINGS
 " ============================================
 
 " ================ Go conf ===================

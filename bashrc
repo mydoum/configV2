@@ -11,6 +11,13 @@
 # ---------------------------------------------------------------------------
 
 # ============================================
+# -1. TEMPORARY COMMANDS
+# ============================================
+
+# function to replace $CURR if you do often more than one command
+alias curr='cd /Users/alonso/Documents/work/octo/rapport'
+
+# ============================================
 # 0. EXTRA NON OPEN CONFIGURATION
 # ============================================
 
@@ -60,7 +67,11 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 # ================ LS =================
-test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
+# With --color=auto, ls uses LS_COLORS environment varaible
+test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" \
+    || eval "$(gdircolors -b)"
+# "gls" comes from coreutils, it is used because "ls" from OSX doesn't uses
+# --color=auto
 alias ls='gls -F --color=auto'
 alias l='ls -Fh'
 alias la='ls -a'
@@ -68,8 +79,6 @@ alias ll='ls -lvh'
 
 # ============= Aliases ===============
 alias path='echo -e ${PATH//:/\\n}'
-#gls --color allows to use  LSCOLOR
-#gls comes from coreutils
 alias tree='tree -C'
 alias untar='tar -zxvf'
 alias mkdir='mkdir -pv'
@@ -80,6 +89,7 @@ alias diff='colordiff'
 
 alias sourceb='source ~/.bash_profile'
 alias vimbash='vim ~/.bashrc'
+alias \:q='exit'
 
 # Activate the bash-completion which autocomplete argument and not
 # only application names
@@ -95,8 +105,6 @@ cd() { builtin cd "$@"; ll; }
 mkcd() { mkdir -p $1; cd $1; }
 # Man should be replaced by man on linux
 man() { Man $1 | less; }
-# function to replace $CURR if you do often more than one command
-curr() { cd /Users/alonso/Documents/study/All/java/2015; }
 
 # extract:  Extract most know archives with one command
 extract () {
