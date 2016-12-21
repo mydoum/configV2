@@ -15,10 +15,11 @@ Everything I need to get setup on a new machine. Currently only working with
         * Insalling [Homebrew][1] & associated packages
         * Installing mac applications using [Homebrew Cask][2]
         * Installing Apple store applications with [Mas][3]
-        * Generate a SSH key and send it to github
-
+        * Generate a SSH key and send it to github and bitbucket
 
 ## Installation
+
+**Warning** : Be sure to backup all you dotfiles before launching this script
 
 ### With git
 

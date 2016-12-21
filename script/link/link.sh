@@ -12,15 +12,19 @@ ln -fs $DOTFILES_DIR/dircolors ~/.dircolors
 
 # vim
 notice "Configuring Vim"
-ln -fs $DOTFILES_DIR/vimrc ~/.vimrc
 # If the folder is present and not a symlink then erase it and replace it with
 # ours
 if [[ -d ~/.vim ]]; then
     if ! [[ -L ~/.vim ]]; then
         rm -r ~/.vim
-        ln -f $DOTFILES_DIR/vim ~/.vim
+        ln -fs $DOTFILES_DIR/vim ~/.vim
     fi
+else
+    ln -fs $DOTFILES_DIR/vim ~/.vim
 fi
+
+# vimrc needs solarized to not be buggy so it's linked after
+ln -fs $DOTFILES_DIR/vimrc ~/.vimrc
 
 if ! [[ -f ~/.vim/autoload/plug.vim ]]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

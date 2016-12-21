@@ -1,3 +1,5 @@
 script/.DS_Store
 vim/.DS_Store
 .DS_Store
+autoload/
+plugged/
