@@ -85,6 +85,8 @@ set autowrite
 "   6. SPELL CHECKER
 " ============================================
 set spelllang=fr
+au BufNewFile,BufRead *.md,*.tex setlocal spell
+
 
 " ============================================
 "   7. BINDINGS

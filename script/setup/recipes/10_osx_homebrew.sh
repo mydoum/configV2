@@ -23,4 +23,5 @@ RECIPES=(
     tldr                # Better man pages
     tree
     vim
+    wget
 )

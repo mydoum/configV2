@@ -128,9 +128,9 @@ extract () {
      fi
 }
 # Searching
-ff () { /usr/bin/find . -name "$@" ; }      # ff:       Find file under the current directory
-ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
-ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+ff () { sudo /usr/bin/find ~/ -name "$@" ; }      # ff:       Find file under the current directory
+ffs () { sudo /usr/bin/find ~/ -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
+ffe () { sudo /usr/bin/find ~/ -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
 
 killport () { kill -9 $(lsof -ti :$1) ;}	# killport:	Kill the application listening on this specific port
 
@@ -169,6 +169,11 @@ ii() {
     #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
     echo
 }
+
+# TODO: change then alias depending on the distrib
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    alias wifi='networksetup -getairportpower en1 | grep "On" && networksetup -setairportpower en1 off || networksetup -setairportpower en1 on '
+fi
 
 # ============================================
 #   6. LANGUAGES CONFIGURATION
