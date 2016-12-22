@@ -26,6 +26,10 @@
 	<true/>
 	<key>Control</key>
 	<integer>1</integer>
+	<key>Coprocess MRU</key>
+	<array>
+		<string>ls</string>
+	</array>
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopySelection</key>
@@ -243,7 +247,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 153 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>274 211 918 512 0 0 1280 777 </string>
+	<string>274 115 796 473 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1280 800 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_1775EAAE-8984-48DC-9104-2CED6D3B3CC6</key>
@@ -893,7 +897,7 @@
 			<key>Set Local Environment Vars</key>
 			<true/>
 			<key>Shortcut</key>
-			<string></string>
+			<string>A</string>
 			<key>Silence Bell</key>
 			<true/>
 			<key>Smart Cursor Color</key>
@@ -1024,7 +1028,7 @@
 			<key>Window Type</key>
 			<integer>1</integer>
 			<key>Working Directory</key>
-			<string>/Users/alonso/Documents/work/octo/rapport</string>
+			<string>/Users/alonso/</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -1769,7 +1773,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>8996CE62-A1C5-4E45-B16A-C9077A98331A</string>
 	<key>NoSyncLastTipTime</key>
-	<real>503948534.01399899</real>
+	<real>504035317.72600502</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1788,6 +1792,7 @@
 		<string>0004</string>
 		<string>0005</string>
 		<string>0006</string>
+		<string>0007</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -1857,11 +1862,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-12-20T17:42:02Z</date>
+	<date>2016-12-21T17:42:03Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
+	<key>Secure Input</key>
+	<true/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>

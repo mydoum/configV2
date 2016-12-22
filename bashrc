@@ -6,7 +6,6 @@
 # 3. Functions
 # 4. Process Management
 # 5. Networking
-# 6. Languages configuration
 
 # ---------------------------------------------------------------------------
 
@@ -14,8 +13,6 @@
 # -1. TEMPORARY COMMANDS
 # ============================================
 
-# function to replace $CURR if you do often more than one command
-alias curr='cd /Users/alonso/Documents/work/octo/rapport'
 
 # ============================================
 # 0. EXTRA NON OPEN CONFIGURATION
@@ -174,77 +171,3 @@ ii() {
 if [[ "$OSTYPE" =~ ^darwin ]]; then
     alias wifi='networksetup -getairportpower en1 | grep "On" && networksetup -setairportpower en1 off || networksetup -setairportpower en1 on '
 fi
-
-# ============================================
-#   6. LANGUAGES CONFIGURATION
-# ============================================
-
-
-# ============================================
-# ================ NodeJS conf ===============
-# ============================================
-
-# export NODE_PATH=/usr/local/lib/node
-# export NODE_PATH=/usr/local/Cellar/node/7.0.0/bin/node
-
-
-# ============================================
-# ================ Java conf =================
-# ============================================
-
-export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
-# export PATH=${PATH}:${JBOSS_HOME}/bin
-
-function tomcat(){
-    /usr/local/Cellar/tomcat/8.0.27/bin/catalina run
-}
-
-# ============================================
-# ================ Python conf ================
-# ============================================
-
-#alias python='/usr/bin/python2.7'
-#export PYTHONPATH=/usr/local/lib/python2.7/site-packages
-
-# added by Anaconda3 4.1.1 installer
-export PYTHONPATH=/Users/alonso/anaconda3/bin/python3.5
-# export PATH="/Users/alonso/anaconda3/bin:$PATH"
-
-
-# ============================================
-# ================ POSTGRESQL ================
-# ============================================
-
-export PGDATA=$HOME/Documents/data/postgresql_9-4
-alias pg='postgres -D $PGDATA'
-alias pgfile='cd ~/Documents/Study/Projects/postgresql/sujet_bdd/girald_a-rattrapage-bdd'
-
-# ============================================
-# ================ PHP conf ==================
-# ============================================
-
-# shortcuts php
-alias php-start='launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php55.plist'
-alias php-stop='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php55.plist'
-alias php-restart='php-stop && php-start'
-
-# start needed services to work
-function start(){
-    mysql.server start
-    sudo nginx
-    php-start
-}
-
-function stop(){
-    mysql.server stop
-    sudo nginx -s stop
-    php-stop
-}
-
-# ============================================
-# =================== Ruby ===================
-# ============================================
-
-# eval "$(rbenv init -)"
-# export PATH="$HOME/.rbenv/shims:$PATH"
-
