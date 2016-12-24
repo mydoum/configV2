@@ -1,15 +1,16 @@
 #! /bin/bash
 
 RECIPES=(
-    alfred
-    android-studio
-    andy
-    anki
-    dash
+    alfred              # Spotlight like with workflows
+    android-studio      # Android IDE from Jetbrain
+    andy                # Best android simulator
+    anki                # Flashcard learning system
+    arq                 # Backup manager
+    dash                # Programming documentation manager
     docker
     docker-toolbox
     firefox
-    flux
+    flux                # Change screen color depending on the time
     google-chrome
     intellij-idea
     iterm2
@@ -26,7 +27,6 @@ RECIPES=(
     quicklook-json
     skype
     teamviewer
-    trickster
     utorrent
     virtualbox
     vlc

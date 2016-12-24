@@ -91,6 +91,8 @@ au BufNewFile,BufRead *.md,*.tex setlocal spell
 " ============================================
 "   7. BINDINGS
 " ============================================
+" Save a readonly file
+command SaveRO w !sudo tee %
 
 " ================ Go conf ===================
 map <C-n> :cnext<CR>

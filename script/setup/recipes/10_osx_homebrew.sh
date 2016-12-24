@@ -9,6 +9,7 @@ RECIPES=(
     coreutils           # Reimplementation of basic commands (ls, cd...)
     git
     git-extras
+    go
     jq                  # Command line Json processor
     lastpass-cli
     libtool
