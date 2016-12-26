@@ -17,6 +17,7 @@ RECIPES=(
     node
     openssl
     p7zip               # 7z from independant
+    pidof
     shellcheck          # Bash linter
     sl                  # Locomotive
     ssh-copy-id

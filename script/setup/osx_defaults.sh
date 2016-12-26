@@ -42,4 +42,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Show hidden files in Finder
 defaults write com.apple.finder AppleShowAllFiles YES
 
+# Show path on title bar
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
 success "Done configuring the OSX default settings"

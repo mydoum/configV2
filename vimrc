@@ -26,7 +26,6 @@ set expandtab
 "Format the file from 2 spaces to 4 spaces
 command Format %s/^\s*/&&
 
-
 " ============================================
 "   2. PLUG-IN
 " ============================================
@@ -52,6 +51,12 @@ colorscheme solarized
 
 " show line numbers
 set number
+
+" visual autocomplete for command menu
+set wildmenu
+
+" search as characters are entered
+set incsearch
 
 " ============================================
 "   4. BACKUP

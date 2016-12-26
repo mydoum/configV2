@@ -71,7 +71,7 @@ test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" \
 # --color=auto
 alias ls='gls -F --color=auto'
 alias l='ls -Fh'
-alias la='ls -a'
+alias la='ls -lva'
 alias ll='ls -lvh'
 
 # ============= Aliases ===============
@@ -83,10 +83,16 @@ alias grep='grep --color=auto'
 alias mv='mv -iv'
 alias less='less -FSRXc'
 alias diff='colordiff'
+alias wget='wget -c'            # continue the download in case of problems
 
 alias sourceb='source ~/.bash_profile'
 alias vimbash='vim ~/.bashrc'
+alias vimrc='vim ~/.vimrc'
+
 alias \:q='exit'
+
+alias ..='cd ..'
+alias ...='cd ../..'
 
 # Activate the bash-completion which autocomplete argument and not
 # only application names
@@ -99,7 +105,7 @@ fi
 # ============================================
 
 cd() { builtin cd "$@"; ll; }
-mkcd() { mkdir -p $1; cd $1; }
+mcd() { mkdir -p $1; cd $1; }
 # Man should be replaced by man on linux
 man() { Man $1 | less; }
 
@@ -154,7 +160,7 @@ my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 # ============================================
 
 # Public facing IP Address
-alias myip='curl ip.appspot.com'
+alias myip='curl http://ipecho.net/plain; echo'
 
 # Display open TCP sockets
 alias lsock='sudo /usr/sbin/lsof -nP | grep TCP'
