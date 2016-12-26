@@ -23,6 +23,7 @@ RECIPES=(
     sqlite
     tldr                # Better man pages
     tree
+    unrar
     vim
     wget
 )

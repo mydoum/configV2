@@ -8,6 +8,7 @@
 "   5. Actions
 "   6. Spellchecker
 "   7. Bindings
+"   8. Memos
 
 " ---------------------------------------------------------------------------
 
@@ -113,3 +114,10 @@ function! s:build_go_files()
 endfunction
 
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+
+" ============================================
+"   8. MEMOS
+" ============================================
+" Replace elements
+" : %s/org_text/text_to_repl/gc

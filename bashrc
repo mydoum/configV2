@@ -129,7 +129,12 @@ ff () { sudo /usr/bin/find ~/ -name "$@" ; }      # ff:       Find file under th
 ffs () { sudo /usr/bin/find ~/ -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
 ffe () { sudo /usr/bin/find ~/ -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
 
-killport () { kill -9 $(lsof -ti :$1) ;}	# killport:	Kill the application listening on this specific port
+# killport:	Kill the application listening on this specific port
+killport () { kill -9 $(lsof -ti :$1) ;}
+
+# killapp : Kill all applications from the given name
+killapp () { kill -9 $(pidof $1) ;}
+
 
 # ============================================
 #   4. PROCESS MANAGEMENT
