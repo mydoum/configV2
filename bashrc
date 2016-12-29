@@ -131,15 +131,27 @@ extract () {
      fi
 }
 # Searching
-ff () { sudo /usr/bin/find ~/ -name "$@" ; }      # ff:       Find file under the current directory
-ffs () { sudo /usr/bin/find ~/ -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
-ffe () { sudo /usr/bin/find ~/ -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    ff () { mdfind -onlyin ~/ -name "$@" ; }            # ff:       Find file on OSX with spotlight metadata
+else
+    ff () { sudo /usr/bin/find ~/ -name "$@" ; }        # ff:       Find file under the current directory
+    ffs () { sudo /usr/bin/find ~/ -name "$@"'*' ; }    # ffs:      Find file whose name starts with a given string
+    ffe () { sudo /usr/bin/find ~/ -name '*'"$@" ; }    # ffe:      Find file whose name ends with a given string
+fi
 
 # killport:	Kill the application listening on this specific port
 killport () { kill -9 $(lsof -ti :$1) ;}
 
 # killapp : Kill all applications from the given name
-killapp () { kill -9 $(pidof $1) ;}
+killapp () {
+    [[ "$OSTYPE" =~ ^darwin ]] && local ECHO=gecho || local ECHO=echo
+
+    if kill -9 $(pidof $1) 2>/dev/null ; then
+        ${ECHO} -e "\e[1m\e[32mAll instances killed"
+    else
+        ${ECHO} -e "\e[1m\e[91mApplication not found"
+    fi
+}
 
 
 # ============================================
@@ -181,4 +193,8 @@ ii() {
 # TODO: change then alias depending on the distrib
 if [[ "$OSTYPE" =~ ^darwin ]]; then
     alias wifi='networksetup -getairportpower en1 | grep "On" && networksetup -setairportpower en1 off || networksetup -setairportpower en1 on '
+    alias flushdns='sudo killall -HUP mDNSResponder'
+else
+    alias flishdns='/etc/init.d/nscd restart'
+    #/etc/init.d/named restart
 fi
