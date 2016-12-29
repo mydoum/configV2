@@ -1,6 +1,7 @@
 #! /bin/bash
 
 RECIPES=(
+    archey              # Apple logo on shell startup
     autoconf
     automake
     bash
