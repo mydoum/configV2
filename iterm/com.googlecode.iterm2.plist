@@ -249,9 +249,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 153 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>319 36 918 512 0 0 1280 777 </string>
+	<string>319 60 796 473 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1280 800 0 0 1280 777 </string>
+	<string>0 0 1280 800 0 0 1280 778 </string>
 	<key>NeverWarnAboutShortLivedSessions_1775EAAE-8984-48DC-9104-2CED6D3B3CC6</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_1775EAAE-8984-48DC-9104-2CED6D3B3CC6_selection</key>
@@ -465,7 +465,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>archey --offline</string>
+			<string></string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -500,7 +500,7 @@
 			<key>Cursor Type</key>
 			<integer>2</integer>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>Yes</string>
 			<key>Default Bookmark</key>
@@ -531,7 +531,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string></string>
+			<string>archey --offline</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -1818,7 +1818,7 @@
 	<key>PasteFromClipboard</key>
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
-	<integer>4</integer>
+	<integer>1</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>

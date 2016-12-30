@@ -2,17 +2,30 @@
 
 # Sections:
 # 1. Environment Configuration
-# 2. Make Terminal Better (remapping defaults and adding functionality)
-# 3. Functions
-# 4. Process Management
-# 5. Networking
+# 2. Backup history
+# 3. Make Terminal Better (remapping defaults and adding functionality)
+# 4. Functions
+# 5. Process Management
+# 6. Networking
 
 # ---------------------------------------------------------------------------
 
 # ============================================
-# -1. TEMPORARY COMMANDS
+# -2. TEMPORARY COMMANDS
 # ============================================
 
+
+# ============================================
+# -1. GLOBAL VARIABLES
+# ============================================
+
+[[ "$OSTYPE" =~ ^darwin ]] && ECHO=gecho || ECHO=echo
+[[ "$OSTYPE" =~ ^darwin ]] && LS=gls || LS=ls
+
+RED="\e[91m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+WHITE="\e[39m"
 
 # ============================================
 # 0. EXTRA NON OPEN CONFIGURATION
@@ -40,10 +53,38 @@ export GOPATH=$HOME
 export GOROOT=/usr/local/go
 
 # ============================================
-# 2. MAKE TERMINAL A BETTER WORLD
+# 2. BACKUP HISTORY
 # ============================================
 
-# prompt & colors
+# The number of lines or commands that (a) are allowed in the history file at
+# startup time of a session, and (b) are stored in the history file at the end of
+# your bash session for use in future sessions.
+export HISTFILESIZE=10000
+
+# The number of lines or commands that are stored in memory in a history list
+# while your bash session is ongoing.
+export HISTSIZE=500
+
+# Don't put duplicate lines in the history and do not add lines that start with
+# a space
+export HISTCONTROL=erasedups:ignoredups:ignorespace
+
+# Bash immediately add commands to our history instead of waiting for the end
+# of each session
+# This command append to the history file immediately with history -a, clear the
+# current history in our session with history -c, and then read the history file
+# that we've appended to, back into our session history with history -r
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# To execute the 51st command from bach history you can do :
+# !51
+
+# ============================================
+# 3. MAKE TERMINAL A BETTER WORLD
+# ============================================
+
+# ========= Prompt & Colors ===========
+
 export CLICOLOR=1
 export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
 export PS2="continue-> "
@@ -64,26 +105,32 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 # ================ LS =================
+
+# To temporarily bypass an alias, preceed the command with a \
+# EG: the ls command is aliased, to use the normal ls command, type \ls
+
 # With --color=auto, ls uses LS_COLORS environment varaible
 test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" \
     || eval "$(gdircolors -b)"
-# "gls" comes from coreutils, it is used because "ls" from OSX doesn't uses
-# --color=auto
-alias ls='gls -F --color=auto'
+alias ls='${LS} -F --color=auto'
 alias l='ls -Fh'
 alias la='ls -lva'
 alias ll='ls -lvh'
 
 # ============= Aliases ===============
+
 alias path='echo -e ${PATH//:/\\n}'
-alias tree='tree -C'
-alias untar='tar -zxvf'
+alias tree='tree -Ch'
 alias mkdir='mkdir -pv'
 alias grep='grep --color=auto'
 alias mv='mv -iv'
 alias less='less -FSRXc'
 alias diff='colordiff'
 alias wget='wget -c'            # continue the download in case of problems
+alias bd='cd "$OLDPWD"'         # cd into the old directory
+
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
 
 alias sourceb='source ~/.bash_profile'
 alias vimbash='vim ~/.bashrc'
@@ -100,16 +147,22 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 	. $(brew --prefix)/etc/bash_completion
 fi
 
+# ============ Bindings ==============
+
+# Show auto-completion list automatically, without double tab
+bind "set show-all-if-ambiguous On"
+
+# THe autocompletion is not cas sensitive
+bind "set completion-ignore-case On"
+
 # ============================================
-#   3. FUNCTIONS
+#   4. FUNCTIONS
 # ============================================
 
 cd() { builtin cd "$@"; ll; }
 mcd() { mkdir -p $1; cd $1; }
-# Man should be replaced by man on linux
-man() { Man $1 | less; }
 
-# extract:  Extract most know archives with one command
+#               extract:  Extract most know archives with one command
 extract () {
     if [ -f $1 ] ; then
       case $1 in
@@ -124,77 +177,75 @@ extract () {
         *.zip)       unzip $1       ;;
         *.Z)         uncompress $1  ;;
         *.7z)        7z x $1        ;;
-        *)     echo "'$1' cannot be extracted via extract()" ;;
+        *)     ${ECHO} "\e[1m\e[91m'$1' cannot be extracted via extract()" ;;
          esac
      else
-         echo "'$1' is not a valid file"
+         ${ECHO} "\e[1m\e[91m'$1' is not a valid file"
      fi
 }
-# Searching
+
+
+# ============= Searching ===============
+
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-    ff () { mdfind -onlyin ~/ -name "$@" ; }            # ff:       Find file on OSX with spotlight metadata
+    # ff:       Find file on OSX with spotlight metadata
+    ff () { mdfind -onlyin ~/ -name "$@" ; }
 else
-    ff () { sudo /usr/bin/find ~/ -name "$@" ; }        # ff:       Find file under the current directory
-    ffs () { sudo /usr/bin/find ~/ -name "$@"'*' ; }    # ffs:      Find file whose name starts with a given string
-    ffe () { sudo /usr/bin/find ~/ -name '*'"$@" ; }    # ffe:      Find file whose name ends with a given string
+    # ff:       Find file under the current directory
+    ff () { sudo /usr/bin/find ~/ -name "$@" ; }
+
+    # ffs:      Find file whose name starts with a given string
+    ffs () { sudo /usr/bin/find ~/ -name "$@"'*' ; }
+
+    # ffe:      Find file whose name ends with a given string
+    ffe () { sudo /usr/bin/find ~/ -name '*'"$@" ; }
 fi
 
-# killport:	Kill the application listening on this specific port
-killport () { kill -9 $(lsof -ti :$1) ;}
-
-# killapp : Kill all applications from the given name
-killapp () {
-    [[ "$OSTYPE" =~ ^darwin ]] && local ECHO=gecho || local ECHO=echo
-
+#               killport:	Kill the application listening on this specific port
+killport () {
     if kill -9 $(pidof $1) 2>/dev/null ; then
-        ${ECHO} -e "\e[1m\e[32mAll instances killed"
+        ${ECHO} -e "${GREEN}All instances killed"
     else
-        ${ECHO} -e "\e[1m\e[91mApplication not found"
+        ${ECHO} -e "${RED}Application not found"
     fi
 }
 
+#               killapp : Kill all applications from the given name
+killapp () {
+    if kill -9 $(pidof $1) 2>/dev/null ; then
+        ${ECHO} -e "${GREEN}All instances killed"
+    else
+        ${ECHO} -e "${RED}Application not found"
+    fi
+}
 
 # ============================================
-#   4. PROCESS MANAGEMENT
+#   5. PROCESS MANAGEMENT
 # ============================================
 
-# cpuHogs:  Find CPU hogs
+#               cpuHogs:  Find CPU hogs
 alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
 
-# Real time monitoring
+#               monitor:  Real time monitoring
 alias monitor='top -R -F -s 10 -o rsize -s 2'
 
-# List processes owned by my user
+#               my_ps:    List processes owned by my user
 my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
 
 # ============================================
-#   5. NETWORKING
+#   6. NETWORKING
 # ============================================
 
-# Public facing IP Address
+#               myip: Public facing IP Address
 alias myip='curl http://ipecho.net/plain; echo'
 
-# Display open TCP sockets
+#               lsock: Display open TCP sockets
 alias lsock='sudo /usr/sbin/lsof -nP | grep TCP'
 
-# Useful information
-ii() {
-    echo -e "\nYou are logged on ${RED}$HOST"
-    echo -e "\nAdditionnal information:$NC " ; uname -a
-    echo -e "\n${RED}Users logged on:$NC " ; w -h
-    echo -e "\n${RED}Current date :$NC " ; date
-    echo -e "\n${RED}Machine stats :$NC " ; uptime
-    echo -e "\n${RED}Current network location :$NC " ; scselect
-    echo -e "\n${RED}Public facing IP Address :$NC " ;myip
-    #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
-    echo
-}
-
-# TODO: change then alias depending on the distrib
 if [[ "$OSTYPE" =~ ^darwin ]]; then
     alias wifi='networksetup -getairportpower en1 | grep "On" && networksetup -setairportpower en1 off || networksetup -setairportpower en1 on '
     alias flushdns='sudo killall -HUP mDNSResponder'
 else
-    alias flishdns='/etc/init.d/nscd restart'
+    alias flushdns='/etc/init.d/nscd restart'
     #/etc/init.d/named restart
 fi

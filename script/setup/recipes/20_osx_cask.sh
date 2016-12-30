@@ -7,6 +7,7 @@ RECIPES=(
     anki                # Flashcard learning system
     arq                 # Backup manager
     dash                # Programming documentation manager
+    datagrip
     docker
     docker-toolbox
     firefox
