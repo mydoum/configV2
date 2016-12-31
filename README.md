@@ -44,6 +44,17 @@ launch the proper script depending on the distribution
 * Disable the “Are you sure you want to open this application?” dialog
 * Show hidden files in Finder
 * Show path on title bar
+* Disable the sound effects on boot
+* Set highlight color to green
+* Use dark menu bar and dock
+* Use graphite mode
+* Enable firewall
+* Disable guest account login
+* Disable auto-correct
+* Keep folders on top when sorting by name
+* Automatically open a new Finder window when a volume is mounted
+* Use list view in all Finder windows by default
+* Disable the warning before emptying the Trash
 
 ## OSX programs installation
 
@@ -71,3 +82,4 @@ I'm inspired by these dotfiles repos
 
 * [NathanielLandau](https://github.com/natelandau/shell-scripts)
 * [Cowboy](https://github.com/cowboy/dotfiles)
+* [atomantic](https://github.com/atomantic/dotfiles)
