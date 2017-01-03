@@ -69,3 +69,6 @@ source $DOTFILE_SCRIPTS_OSX_DIR/ssd.sh
 
 # OSX_DEFAULTS options
 source $DOTFILE_SCRIPTS_OSX_DIR/osx_defaults.sh
+
+# npm installation
+source $DOTFILE_SCRIPTS_DIR/npm.sh

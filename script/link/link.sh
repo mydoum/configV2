@@ -4,13 +4,14 @@
 # ==================================================================================
 # link.sh
 
-# bash
 notice "Configuring Bash"
 ln -fs $DOTFILES_DIR/bashrc ~/.bashrc
 ln -fs $DOTFILES_DIR/bash_profile ~/.bash_profile
 ln -fs $DOTFILES_DIR/dircolors ~/.dircolors
 
-# vim
+notice "Configuring the readline"
+ln -fs $DOTFILES_DIR/inputrc ~/.inputrc
+
 notice "Configuring Vim"
 # If the folder is present and not a symlink then erase it and replace it with
 # ours
@@ -39,6 +40,6 @@ notice "Configuring git"
 ln -fs $DOTFILES_DIR/gitconfig ~/.gitconfig
 
 # hush login
-if ! [[ -f ~/.vim/autoload/plug.vim ]]; then
+if ! [[ -f ~/.hushlogin ]]; then
     cp $DOTFILES_DIR/hushlogin ~/.hushlogin
 fi

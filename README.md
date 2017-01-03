@@ -25,14 +25,14 @@ curl -s https://raw.githubusercontent.com/mydoum/dotfiles/master/setup.sh | bash
 
 # What's here
 
-** setup.sh **
+**/setup.sh**
 
 Script to be downloaded, it will install git, clone the repository and
 launch the proper script depending on the distribution
 
 ## MacOS Configuration
 
-**script/setup/osx_defaults.sh**
+**/script/setup/osx_defaults.sh**
 
 * Set a faster keyboard repeat rate
 * Disable press-and-hold for keys in favor of key repeat
@@ -56,7 +56,7 @@ launch the proper script depending on the distribution
 
 ## MacOS programs installation
 
-** script/setup/osx.sh **
+**script/setup/osx.sh**
 
 * Insalling [Homebrew][1] & associated packages
 * Installing mac applications using [Homebrew Cask][2]

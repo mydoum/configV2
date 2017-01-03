@@ -26,6 +26,7 @@ RECIPES=(
     qlstephen           # quicklook README INSTALL Makefile
     quicklook-csv
     quicklook-json
+    spectacle           # Move and resize windows with ease
     skype
     teamviewer
     utorrent

@@ -1,0 +1,17 @@
+# Show auto-completion list automatically, without double tab
+set show-all-if-ambiguous On
+
+# ====================================
+# Vim mode for all readline modes
+# ====================================
+
+# Esc or ctrl+[ to enter in normal mode
+# b : previous word
+# w : next word
+# dd : delete line
+# i : enter in insert mode
+# ctrl + R : search
+# j : move up in bash history
+# k : move down in bash history
+
+set editing-mode vi

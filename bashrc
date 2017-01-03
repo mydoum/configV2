@@ -132,9 +132,10 @@ alias bd='cd "$OLDPWD"'         # cd into the old directory
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf'
 
+alias v='vim'
 alias sourceb='source ~/.bash_profile'
-alias vimbash='vim ~/.bashrc'
-alias vimrc='vim ~/.vimrc'
+alias vimbash='v ~/.bashrc'
+alias vimrc='v ~/.vimrc'
 
 alias \:q='exit'
 
@@ -146,11 +147,6 @@ alias ...='cd ../..'
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
 	. $(brew --prefix)/etc/bash_completion
 fi
-
-# ============ Bindings ==============
-
-# Show auto-completion list automatically, without double tab
-bind "set show-all-if-ambiguous On"
 
 # ============================================
 #   4. FUNCTIONS
