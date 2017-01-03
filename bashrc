@@ -42,7 +42,7 @@ fi
 DEFAULTPATH=/usr/bin:/bin:/usr/sbin:/sbin
 BREWPATH=/usr/local/bin:/usr/local/sbin
 LATEXPATH=/Library/TeX/texbin
-export PATH=$DEFAULTPATH:$BREWPATH:$GOPATH/bin:$LATEXPATH
+export PATH=$BREWPATH:$DEFAULTPATH:$GOPATH/bin:$LATEXPATH
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -151,9 +151,6 @@ fi
 
 # Show auto-completion list automatically, without double tab
 bind "set show-all-if-ambiguous On"
-
-# THe autocompletion is not cas sensitive
-bind "set completion-ignore-case On"
 
 # ============================================
 #   4. FUNCTIONS

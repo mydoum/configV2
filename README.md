@@ -2,8 +2,7 @@ My Dotfiles
 ===========
 
 Everything I need to get setup on a new machine. Currently only working with
-
-* OSX
+MacOS
 
 
 # Installation
@@ -31,7 +30,7 @@ curl -s https://raw.githubusercontent.com/mydoum/dotfiles/master/setup.sh | bash
 Script to be downloaded, it will install git, clone the repository and
 launch the proper script depending on the distribution
 
-## OSX Configuration
+## MacOS Configuration
 
 **script/setup/osx_defaults.sh**
 
@@ -44,7 +43,6 @@ launch the proper script depending on the distribution
 * Disable the “Are you sure you want to open this application?” dialog
 * Show hidden files in Finder
 * Show path on title bar
-* Disable the sound effects on boot
 * Set highlight color to green
 * Use dark menu bar and dock
 * Use graphite mode
@@ -56,7 +54,7 @@ launch the proper script depending on the distribution
 * Use list view in all Finder windows by default
 * Disable the warning before emptying the Trash
 
-## OSX programs installation
+## MacOS programs installation
 
 ** script/setup/osx.sh **
 
@@ -67,10 +65,31 @@ launch the proper script depending on the distribution
 
 ## Softwares configuration
 
-* Bash
-* Vim
-* Iterm
-* Git
+### Bash
+
+
+
+### Vim
+
+![vim example](/screen_vim.png)
+
+### Iterm
+
+* `/hushlogin` : Allows to not show the last login time at term's login
+* Show Archey at term's login
+
+### Git
+
+It's better to put git shortcuts in `~/.gitconfig` instead of `~/.bashrc` in order to
+keep parameters completion with bash_completion
+
+**/gitconfig**
+
+* git s = git status -s
+* git ac = !git add. && git commit -am
+* git rao = git remote add origin
+* git cm = git commit -m
+* git p = git push
 
 [1]: http://brew.sh
 [2]: http://caskroom.io

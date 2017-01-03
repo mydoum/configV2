@@ -36,13 +36,6 @@ defaults write NSGlobalDomain AppleAquaColorVariant 6
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # ========================
-# Firmware configuration
-# ========================
-
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=%01
-
-# ========================
 # Finder
 # ========================
 

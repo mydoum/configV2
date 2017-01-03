@@ -249,7 +249,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 153 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>319 60 796 473 0 0 1280 800 </string>
+	<string>319 192 796 473 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1280 800 0 0 1280 778 </string>
 	<key>NeverWarnAboutShortLivedSessions_1775EAAE-8984-48DC-9104-2CED6D3B3CC6</key>
@@ -1775,7 +1775,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>8996CE62-A1C5-4E45-B16A-C9077A98331A</string>
 	<key>NoSyncLastTipTime</key>
-	<real>504723847.85526401</real>
+	<real>504815930.794653</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1802,9 +1802,10 @@
 		<string>0012</string>
 		<string>0013</string>
 		<string>0014</string>
+		<string>0015</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
-	<true/>
+	<false/>
 	<key>OpenArrangementAtStartup</key>
 	<true/>
 	<key>OpenBookmark</key>
@@ -1855,7 +1856,7 @@
 	<key>PrefsCustomFolder</key>
 	<string>/Users/alonso/dotfiles/iterm</string>
 	<key>PromptOnQuit</key>
-	<true/>
+	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -1871,7 +1872,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-12-29T18:22:29Z</date>
+	<date>2016-12-30T18:38:50Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

@@ -38,3 +38,7 @@ success "Vim plugin installed"
 notice "Configuring git"
 ln -fs $DOTFILES_DIR/gitconfig ~/.gitconfig
 
+# hush login
+if ! [[ -f ~/.vim/autoload/plug.vim ]]; then
+    cp $DOTFILES_DIR/hushlogin ~/.hushlogin
+fi
