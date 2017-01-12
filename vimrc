@@ -93,6 +93,12 @@ set autowrite
 set spelllang=fr
 au BufNewFile,BufRead *.md,*.tex setlocal spell
 
+function CallAntidote()
+    :w
+    call system("open -a /Applications/Antidote\\ 9.app ".bufname("%"))
+endfunction
+
+nmap <silent> <C-B> :call CallAntidote()<CR>
 
 " ============================================
 "   7. BINDINGS

@@ -5,6 +5,11 @@
 # ============================================================================
 
 notice "Configuring the OSX default settings"
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
 # ========================
 # Interfaces
 # ========================
@@ -14,6 +19,9 @@ defaults write -g KeyRepeat -int 3
 
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # ========================
 # Screen
@@ -32,8 +40,8 @@ defaults write NSGlobalDomain AppleInterfaceStyle Dark
 # Use Appearance Graphite
 defaults write NSGlobalDomain AppleAquaColorVariant 6
 
-# Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Indicate Hidden App Icons on Dock
+defaults write com.apple.dock showhidden -bool TRUE; killall Dock
 
 # ========================
 # Finder
@@ -72,6 +80,15 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
+# Set sidebar icon size to medium
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+
+# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+defaults write com.apple.finder QuitMenuItem -bool true
+
+# Avoid creating .DS_Store files on USB volumes
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
 # ========================
 # Security
 # ========================
@@ -84,5 +101,9 @@ sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 
 # Disable guest account login
 sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+
+# Enable Secure Keyboard Entry in Terminal.app
+# See: https://security.stackexchange.com/a/47786/8918
+defaults write com.apple.terminal SecureKeyboardEntry -bool true
 
 success "Done configuring the OSX default settings"

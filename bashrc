@@ -134,8 +134,9 @@ alias mkbz2='tar -cvjf'
 
 alias v='vim'
 alias sourceb='source ~/.bash_profile'
-alias vimbash='v ~/.bashrc'
-alias vimrc='v ~/.vimrc'
+alias bashrc='vim ~/.bashrc'
+alias vimrc='vim ~/.vimrc'
+alias vi='vim'
 
 alias \:q='exit'
 

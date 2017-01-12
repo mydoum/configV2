@@ -14,4 +14,4 @@ set show-all-if-ambiguous On
 # j : move up in bash history
 # k : move down in bash history
 
-set editing-mode vi
+# set editing-mode vi
