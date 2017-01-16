@@ -86,7 +86,12 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # ========= Prompt & Colors ===========
 
 export CLICOLOR=1
-export PS1="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+
+PS1_DEFAULT="\[\033[31m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
+PS1_GIT="(\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))"
+PS1_END="\$ "
+export PS1=$PS1_DEFAULT$PS1_GIT$PS1_END
+
 export PS2="continue-> "
 export PS4='\[\e[35m\]$0-l.$LINENO:\[\e[m\]  '
 

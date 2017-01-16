@@ -16,6 +16,7 @@ RECIPES=(
     lastpass-cli
     libtool
     mackup              # Helps to save applications configuration
+    mongodb
     node
     openssl
     p7zip               # 7z from independant
