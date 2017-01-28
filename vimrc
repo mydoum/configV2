@@ -19,8 +19,8 @@ set textwidth=79
 set ruler
 
 " Tab into spaces
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 "Format the file from 2 spaces to 4 spaces
