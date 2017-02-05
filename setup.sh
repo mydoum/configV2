@@ -72,3 +72,6 @@ source $DOTFILE_SCRIPTS_OSX_DIR/osx_defaults.sh
 
 # npm installation
 source $DOTFILE_SCRIPTS_DIR/npm.sh
+
+# pip installation
+source $DOTFILE_SCRIPTS_DIR/pip.sh
