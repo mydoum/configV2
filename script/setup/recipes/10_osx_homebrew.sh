@@ -13,6 +13,7 @@ RECIPES=(
     git-extras
     go
     jq                  # Command line Json processor
+    kubectl             # Kubernetes CL
     lastpass-cli
     libtool
     mackup              # Helps to save applications configuration

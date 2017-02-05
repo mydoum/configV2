@@ -4,3 +4,5 @@ vim/.DS_Store
 autoload/
 plugged/
 vim/.netrwhist
+bashrc.backup
+npm-debug.log
