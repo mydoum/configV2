@@ -14,6 +14,8 @@
 # -2. TEMPORARY COMMANDS
 # ============================================
 
+# Add cloud key on ssh agent
+ssh-add ~/.ssh/cloud
 
 # ============================================
 # -1. GLOBAL VARIABLES
@@ -55,6 +57,9 @@ source '/Users/ALG/lib/azure-cli/az.completion'
 alias godebug='go build -gcflags "-N -l"'
 export GOPATH=$HOME
 export GOROOT=/usr/local/go
+
+# ================ Kubernetes conf ===================
+export KUBECONFIG=$HOME/config
 
 # ============================================
 # 2. BACKUP HISTORY

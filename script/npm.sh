@@ -6,6 +6,7 @@ npm update
 notice "Installing npm dependencies"
 npm install nodemon -g
 npm install gulp -g
+npm install jade -g
 
 notice "Installing meteor"
 if ! type meteor; then
