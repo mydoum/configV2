@@ -8,6 +8,7 @@ npm install nodemon -g
 npm install gulp -g
 npm install jade -g
 npm install bower -g
+npm install ember-cli -g
 
 notice "Installing meteor"
 if ! type meteor; then
