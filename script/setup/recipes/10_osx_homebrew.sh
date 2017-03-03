@@ -22,6 +22,7 @@ RECIPES=(
     openssl
     p7zip               # 7z from independant
     pidof
+    postgresql
     shellcheck          # Bash linter
     sl                  # Locomotive
     ssh-copy-id

@@ -15,7 +15,7 @@
 # ============================================
 
 # Add cloud key on ssh agent
-ssh-add ~/.ssh/cloud
+# ssh-add ~/.ssh/cloud
 
 # ============================================
 # -1. GLOBAL VARIABLES
