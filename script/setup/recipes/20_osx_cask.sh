@@ -30,6 +30,8 @@ RECIPES=(
     skype
     teamviewer
     utorrent
+    vagrant
+    vagrant-manager
     virtualbox
     vlc
     webpquicklook
