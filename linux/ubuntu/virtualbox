@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Needed if you run ubuntu on virtualbox
+sudo apt-get install virtualbox-guest-x11 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-source
