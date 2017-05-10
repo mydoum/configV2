@@ -23,6 +23,16 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
+# Disable fn states keys
+defaults write -g com.apple.keyboard.fnState -bool true
+
+# ========================
+# Pad
+# ========================
+
+# Change pad scroll direction
+defaults write -g com.apple.swipescrolldirection -bool FALSE
+
 # ========================
 # Screen
 # ========================

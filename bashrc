@@ -38,6 +38,9 @@ if [ -f ~/.bash_private ]; then
    source ~/.bash_private
 fi
 
+# ex: export http_proxy=http://$user:$password@$proxy_ip:$proxy_port
+# ex: export https_proxy=http://$user:$password@$proxy_ip:$proxy_port
+
 # ============================================
 # 1. ENVIRONMENT CONFIGURATION
 # ============================================
@@ -79,8 +82,8 @@ export HISTSIZE=500
 # a space
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 
-# don't put duplicate lines or lines starting with space in the history. 
-# See bash(1) for more options 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
 export HISTCONTROL=ignoreboth
 
 # Bash immediately add commands to our history instead of waiting for the end
@@ -123,8 +126,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # fix tmux
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-# check the window size after each command and, if necessary, 
-# update the values of LINES and COLUMNS. 
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 # ================ LS =================

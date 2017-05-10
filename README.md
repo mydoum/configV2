@@ -12,15 +12,12 @@ MacOS
 ### With git
 
 ```sh
+$ git # When calling git for the first time, macOs will ask you to install some softwares
+$ export https_proxy=http://user:pw@myproxy.com:8080 # If you are under an enterprise proxy
 $ git clone https://github.com/mydoum/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 $ chmod +x setup.sh
 $ ./setup.sh
-```
-### Remotely install using curl
-
-```sh
-curl -s https://raw.githubusercontent.com/mydoum/dotfiles/master/setup.sh | bash 2>&1 | tee ~/setup.log
 ```
 
 # What's here

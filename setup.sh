@@ -75,3 +75,6 @@ source $DOTFILE_SCRIPTS_DIR/npm.sh
 
 # pip installation
 source $DOTFILE_SCRIPTS_DIR/pip.sh
+
+# refresh bash
+source ~/.bashrc
