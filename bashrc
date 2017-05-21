@@ -16,6 +16,9 @@
 
 # Add cloud key on ssh agent
 # ssh-add ~/.ssh/cloud
+function token() {
+  ~/Script/token.sh $1
+}
 
 
 # ============================================
@@ -38,8 +41,21 @@ if [ -f ~/.bash_private ]; then
    source ~/.bash_private
 fi
 
-# ex: export http_proxy=http://$user:$password@$proxy_ip:$proxy_port
-# ex: export https_proxy=http://$user:$password@$proxy_ip:$proxy_port
+# ex: $user, $password, proxy_ip, $proxy_port
+
+# ============================================
+# 0_1. EXPORT PROXY CONF
+# ============================================
+
+function proxy_on() {
+  export http_proxy=http://${proxy_user}:${proxy_password}@${proxy}:${proxy_port}
+  export https_proxy=${http_proxy}
+}
+
+function proxy_off() {
+  export http_proxy=""
+  export https_proxy=""
+}
 
 # ============================================
 # 1. ENVIRONMENT CONFIGURATION

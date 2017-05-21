@@ -20,6 +20,7 @@ RECIPES=(
     mactex              # All elements needed to write in LateX
     oversight           # Protect the use of webcam and micros
     phpstorm
+    postman
     pycharm
     qlcolorcode         # quicklook Syntax code
     qlmarkdown
