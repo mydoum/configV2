@@ -16,6 +16,7 @@
 
 # Add cloud key on ssh agent
 # ssh-add ~/.ssh/cloud
+
 function token() {
   ~/Script/token.sh $1
 }
@@ -64,22 +65,14 @@ function proxy_off() {
 DEFAULTPATH=/usr/bin:/bin:/usr/sbin:/sbin
 BREWPATH=/usr/local/bin:/usr/local/sbin
 LATEXPATH=/Library/TeX/texbin
-AZUREPATH=/Users/$USER/bin
 export PATH=$BREWPATH:$DEFAULTPATH:$GOPATH/bin:$LATEXPATH:$AZUREPATH
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# Add extra completion for azure
-source '/Users/ALG/lib/azure-cli/az.completion'
-
-# ================ Go conf ===================
-alias godebug='go build -gcflags "-N -l"'
-export GOPATH=$HOME
-export GOROOT=/usr/local/go
-
-# ================ Kubernetes conf ===================
-export KUBECONFIG=$HOME/config
+if [ -f ~/.bash_env ]; then
+   source ~/.bash_env
+fi
 
 # ============================================
 # 2. BACKUP HISTORY
