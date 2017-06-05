@@ -8,7 +8,6 @@ RECIPES=(
     bash-completion
     colordiff
     coreutils           # Reimplementation of basic commands (ls, cd...)
-    ffmpeg              # mpeg converter
     git
     git-extras
     go
