@@ -1,13 +1,19 @@
 #! /bin/bash
 
+# Import the confirmation dialog functions
+source $DOTFILE_SCRIPTS_DIR/confirmation.sh
+
 notice "Updating npm"
 npm update
 
-notice "Installing npm dependencies"
-npm install nodemon -g
-npm install gulp -g
-npm install jade -g
-npm install ember-cli -g
+seek_confirmation "Install global npm dependencies?"
+if is_confirmed; then
+  notice "Installing npm dependencies"
+  npm install nodemon -g
+  npm install gulp -g
+  npm install jade -g
+  npm install ember-cli -g
+fi
 
 notice "Installing meteor"
 if ! type meteor; then
