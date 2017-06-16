@@ -21,6 +21,7 @@ function token() {
   ~/Script/token.sh $1
 }
 
+export PASSWORD=$password
 
 # ============================================
 # -1. GLOBAL VARIABLES
@@ -48,12 +49,18 @@ fi
 # 0_1. EXPORT PROXY CONF
 # ============================================
 
+export PHENIX_USER_NAME=$(whoami)
+export PHENIX_USER_ID=$(id -u)
+export PHENIX_GROUP_ID=$(id -g)
+
+export no_proxy='localhost'
+
 function proxy_on() {
   export http_proxy=http://${proxy_user}:${proxy_password}@${proxy}:${proxy_port}
   export https_proxy=${http_proxy}
-  export SBT_OPTS="$SBT_OPTS -Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|} -Dhttps.proxyHost=$proxy -Dhttps.proxyPort=$proxy_port -Dhttps.proxyUser=$proxy_user -Dhttps.proxyPassword=$proxy_password -Dhttps.nonProxyHosts=${no_proxy//,/|}"
-  export JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|}"
-  export _JAVA_OPTIONS="$_JAVA_OPTIONS -Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|}"
+
+  export SBT_OPTS="-Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|} -Dhttps.proxyHost=$proxy -Dhttps.proxyPort=$proxy_port -Dhttps.proxyUser=$proxy_user -Dhttps.proxyPassword=$proxy_password -Dhttps.nonProxyHosts=${no_proxy//,/|}"
+  export JAVA_OPTS="-Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|}"
 export GIT_SSH_COMMAND="ssh -o ProxyCommand=\"socat - PROXY:$proxy:%h:%p,proxyport=$proxy_port,proxyauth=$proxy_user:$proxy_password\""
 export DOCKER_RUN_PROXY="-e https_proxy=$https_proxy -e http_proxy=$http_proxy -e no_proxy=$no_proxy"
 }
@@ -63,10 +70,11 @@ function proxy_off() {
   export https_proxy=""
   export SBT_OPTS=""
   export JAVA_OPTS=""
-  export _JAVA_OPTIONS=""
-  export GIT_SSH_COMMAND=""
+  unset GIT_SSH_COMMAND
   export DOCKER_RUN_PROXY=""
 }
+
+proxy_on
 
 # ============================================
 # 1. ENVIRONMENT CONFIGURATION
@@ -157,6 +165,7 @@ shopt -s checkwinsize
 # With --color=auto, ls uses LS_COLORS environment varaible
 test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" \
     || eval "$(gdircolors -b)"
+alias s='sudo'
 alias ls='${LS} -F --color=auto'
 alias l='ls -Fh'
 alias la='ls -lva'
@@ -180,6 +189,7 @@ alias mkbz2='tar -cvjf'
 alias v='vim'
 alias sourceb='source ~/.bash_profile'
 alias bashrc='vim ~/.bashrc'
+alias bash_env='vim ~/.bash_env'
 alias vimrc='vim ~/.vimrc'
 alias vi='vim'
 

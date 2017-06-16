@@ -1,3 +1,17 @@
 # ============================================
 # ENVIRONMENT COMMANDS
 # ============================================
+
+# ================== GO ======================
+alias godebug='go build -gcflags "-N -l"'
+export GOPATH=$HOME
+export GOROOT=/usr/local/go
+
+ # ============== KUBERNETES =================
+export KUBECONFIG=$HOME/config
+
+# ================ MONGODB ===================
+alias mongod='mongod --dbpath $HOME/mongo-data'
+
+# ================= JAVA =====================
+export JDK_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
