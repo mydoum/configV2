@@ -1,3 +1,4 @@
+# My bashrc personal configuration
 # ---------------------------------------------------------------------------
 
 # Sections:
@@ -11,12 +12,24 @@
 # ---------------------------------------------------------------------------
 
 # ============================================
+# -3. CODING STYLE REMINDER
+# ============================================
+
+# [[ ... ]] is preferred over [ ... ]
+# For a function, don't use the keyword "function"
+# In function, use "local" variables
+# If the line is long, add "\" at the end of the line
+
+# ============================================
 # -2. TEMPORARY COMMANDS
 # ============================================
 
 # Add cloud key on ssh agent
 # ssh-add ~/.ssh/cloud
 
+#################
+# Usage : token prod|preprod|dev
+#################
 function token() {
   ~/Script/token.sh $1
 }
@@ -48,6 +61,7 @@ fi
 # ============================================
 # 0_1. EXPORT PROXY CONF
 # ============================================
+proxy_hostname="FRNBPDCG8274.dg.carrefour.com"
 
 export PHENIX_USER_NAME=$(whoami)
 export PHENIX_USER_ID=$(id -u)
@@ -55,26 +69,82 @@ export PHENIX_GROUP_ID=$(id -g)
 
 export no_proxy='localhost'
 
-function proxy_on() {
-  export http_proxy=http://${proxy_user}:${proxy_password}@${proxy}:${proxy_port}
-  export https_proxy=${http_proxy}
+sbt_proxy() {
+  local repo_location=$HOME/.sbt/repositories
+  local cred_location=$HOME/.sbt/0.13/plugins/credentials.sbt
 
-  export SBT_OPTS="-Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|} -Dhttps.proxyHost=$proxy -Dhttps.proxyPort=$proxy_port -Dhttps.proxyUser=$proxy_user -Dhttps.proxyPassword=$proxy_password -Dhttps.nonProxyHosts=${no_proxy//,/|}"
-  export JAVA_OPTS="-Dhttp.proxyHost=$proxy -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttp.nonProxyHosts=${no_proxy//,/|}"
-export GIT_SSH_COMMAND="ssh -o ProxyCommand=\"socat - PROXY:$proxy:%h:%p,proxyport=$proxy_port,proxyauth=$proxy_user:$proxy_password\""
-export DOCKER_RUN_PROXY="-e https_proxy=$https_proxy -e http_proxy=$http_proxy -e no_proxy=$no_proxy"
+  case $1 in
+    true)
+      local is_on=".old"
+      local is_off=""
+      ;;
+    false)
+      local is_on=""
+      local is_off=".old"
+      ;;
+  esac
+
+  local missing_repo_file=${repo_location}${is_off}
+  local present_repo_file=${repo_location}${is_on}
+  local missing_cred_file=${cred_location}${is_off}
+  local present_cred_file=${cred_location}${is_on}
+
+  if [[ ! -f ${missing_repo_file} ]] && [[ -f ${present_repo_file} ]]; then
+    mv ${present_repo_file} ${missing_repo_file}
+  fi
+
+  if [[ ! -f ${missing_cred_file} ]] && [[ -f ${present_cred_file} ]]; then
+    mv ${present_cred_file} ${missing_cred_file}
+  fi
 }
 
-function proxy_off() {
-  export http_proxy=""
-  export https_proxy=""
-  export SBT_OPTS=""
-  export JAVA_OPTS=""
+proxy() {
+  if [[ ${proxy_hostname} == $(hostname) ]]; then
+    echo "[PROXY ON]"
+    export http_proxy=http://${proxy_user}:${proxy_password}@${proxy}:${proxy_port}
+    export https_proxy=${http_proxy}
+
+    export SBT_OPTS="-Dhttp.proxyHost=$proxy  \
+      -Dhttp.proxyPort=$proxy_port            \
+      -Dhttp.proxyUser=$proxy_user            \
+      -Dhttp.proxyPassword=$proxy_password    \
+      -Dhttp.nonProxyHosts=${no_proxy//,/|}   \
+      -Dhttps.proxyHost=$proxy                \
+      -Dhttps.proxyPort=$proxy_port           \
+      -Dhttps.proxyUser=$proxy_user           \
+      -Dhttps.proxyPassword=$proxy_password   \
+      -Dhttps.nonProxyHosts=${no_proxy//,/|}"
+
+    export JAVA_OPTS="-Dhttp.proxyHost=$proxy \
+      -Dhttp.proxyPort=$proxy_port            \
+      -Dhttp.proxyUser=$proxy_user            \
+      -Dhttp.proxyPassword=$proxy_password    \
+      -Dhttp.nonProxyHosts=${no_proxy//,/|}"
+
+    export GIT_SSH_COMMAND="ssh -o ProxyCommand=\"socat \
+      -PROXY:$proxy:%h:%p,proxyport=$proxy_port,proxyauth=$proxy_user:$proxy_password\""
+
+    export DOCKER_RUN_PROXY="-e https_proxy=$https_proxy -e \
+    http_proxy=$http_proxy -e no_proxy=$no_proxy"
+
+    sbt_proxy true
+  else
+    echo "[PROXY OFF]"
+  fi
+}
+
+proxy_off() {
+  echo "[PROXY OFF]"
+  unset http_proxy
+  unset https_proxy
+  unset SBT_OPTS
+  unset JAVA_OPTS
   unset GIT_SSH_COMMAND
-  export DOCKER_RUN_PROXY=""
+  unset DOCKER_RUN_PROXY
+  sbt_proxy false
 }
 
-proxy_on
+proxy
 
 # ============================================
 # 1. ENVIRONMENT CONFIGURATION
@@ -165,7 +235,6 @@ shopt -s checkwinsize
 # With --color=auto, ls uses LS_COLORS environment varaible
 test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" \
     || eval "$(gdircolors -b)"
-alias s='sudo'
 alias ls='${LS} -F --color=auto'
 alias l='ls -Fh'
 alias la='ls -lva'

@@ -14,8 +14,8 @@ osascript -e 'tell application "System Preferences" to quit'
 # Interfaces
 # ========================
 
-# Set a faster keyboard repeat rate.
-defaults write -g KeyRepeat -int 3
+# Set a faster keyboard repeat rate. (recommanded: 3)
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
