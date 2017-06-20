@@ -61,7 +61,7 @@ fi
 # ============================================
 # 0_1. EXPORT PROXY CONF
 # ============================================
-proxy_hostname="FRNBPDCG8274.dg.carrefour.com"
+wifi_SSID="WLAN60"
 
 export PHENIX_USER_NAME=$(whoami)
 export PHENIX_USER_ID=$(id -u)
@@ -99,7 +99,11 @@ sbt_proxy() {
 }
 
 proxy() {
-  if [[ ${proxy_hostname} == $(hostname) ]]; then
+  local airport=/System/Library/PrivateFrameworks/Apple80211.framework
+  local command=/Versions/Current/Resources/airport
+
+  if [[ $($airport$command -I | awk '/ SSID/ {print substr($0, index($0, $2))}') \
+    == ${wifi_SSID} ]]; then
     echo "[PROXY ON]"
     export http_proxy=http://${proxy_user}:${proxy_password}@${proxy}:${proxy_port}
     export https_proxy=${http_proxy}
