@@ -12,6 +12,12 @@
 # ---------------------------------------------------------------------------
 
 # ============================================
+# -4. APPLICATIONS REMINDER
+# ============================================
+echo '[MAN] tldr : show compact documentation of your app'
+echo '[LSOF] pidof : get pid of your app'
+
+# ============================================
 # -3. CODING STYLE REMINDER
 # ============================================
 
@@ -35,6 +41,12 @@ function token() {
 }
 
 export PASSWORD=$password
+
+phenix-workspace() {
+  echo '[START] Initializing the workspace'
+  zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties &
+  kafka-server-start /usr/local/etc/kafka/server.properties &
+}
 
 # ============================================
 # -1. GLOBAL VARIABLES

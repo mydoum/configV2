@@ -9,9 +9,10 @@ RECIPES=(
     colordiff
     coreutils           # Reimplementation of basic commands (ls, cd...)
     git
-    git-extras
+    git-extras          # Extra commands like git ignore
     go
     jq                  # Command line Json processor
+    kafka               # Stream processing in RT
     kubectl             # Kubernetes CL
     lastpass-cli
     libtool
