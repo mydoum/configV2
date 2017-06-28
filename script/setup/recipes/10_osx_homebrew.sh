@@ -1,6 +1,7 @@
 #! /bin/bash
 
 RECIPES=(
+    ansible             # Automation scripting for VM
     archey              # Apple logo on shell startup
     autoconf
     automake

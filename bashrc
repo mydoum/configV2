@@ -12,10 +12,20 @@
 # ---------------------------------------------------------------------------
 
 # ============================================
+# -5. BASH REMINDER
+# ============================================
+
+echo '[INFO] Bash reminders'
+echo '!string : execute the last command containing string'
+echo ''
+
+# ============================================
 # -4. APPLICATIONS REMINDER
 # ============================================
-echo '[MAN] tldr : show compact documentation of your app'
-echo '[LSOF] pidof : get pid of your app'
+echo '[INFO] App reminders'
+echo 'TLDR  : show compact documentation of your app'
+echo 'PIDOF : get pid of your app'
+echo ''
 
 # ============================================
 # -3. CODING STYLE REMINDER
@@ -42,12 +52,65 @@ function token() {
 
 export PASSWORD=$password
 
-phenix-workspace() {
+echo '[WORKSPACES]'
+echo 'phenix-workspace'
+echo 'crm-workspace'
+echo ''
+
+phenix-workspace-start() {
+  sleep 4
   echo '[START] Initializing the workspace'
-  zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties &
-  kafka-server-start /usr/local/etc/kafka/server.properties &
+  zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties & kafka-server-start /usr/local/etc/kafka/server.properties
 }
 
+phenix-workspace-stop() {
+  echo '[STOP] zookeeper & kafka stopped'
+  kafka-server-stop /usr/local/etc/kafka/server.properties
+  zookeeper-server-stop /usr/local/etc/kafka/zookeeper.properties
+}
+
+crm-workspace-start() {
+  echo '[START] Initializing the workspace'
+  cd $HOME/Projects/api-omnirique-client && node . &
+  cd $HOME/Projects/personal-crm; npm start &
+}
+
+crm-workspace-stop() {
+  echo '[STOP] CRM KILLED'
+  kill -9 $(lsof -ti :3001)
+  kill -9 $(lsof -ti :3000)
+}
+
+kill-kafka() {
+  kill -9 $(lsof -ti :9092)
+}
+
+# ============================================
+# -2. APPLICATION COMMANDS REMINDERS
+# ============================================
+
+echo '[REMINDERS]'
+echo 'kafka-reminder -> km'
+kafka-reminder() {
+  echo 'CONF            : /usr/local/etc/kafka'
+  echo 'LOGS            : /usr/local/var/lib/kafka-logs'
+  echo 'EXEC            : /usr/local/Cellar/kafka/0.10.2.0/libexec/'
+  echo 'ZOOKEEPER DATA  : /usr/local/var/lib/zookeeper'
+  echo 'KAFKA DATA      : /usr/local/var/lib/kafka-logs'
+  echo 'CREATE          : kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test'
+  echo 'LIST TOPICS     : kafka-topics --list --zookeeper localhost:2181'
+  echo 'CONSUME         : kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning'
+}
+
+alias km=kafka-reminder
+
+echo 'sbt-reminder'
+sbt-reminder() {
+  echo 'LIST PROJECTS   : projects'
+  echo 'SELECT PROJECT: : project projectname'
+}
+
+echo ''
 # ============================================
 # -1. GLOBAL VARIABLES
 # ============================================
