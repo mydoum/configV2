@@ -110,6 +110,13 @@ sbt-reminder() {
   echo 'SELECT PROJECT: : project projectname'
 }
 
+echo 'proxy-reminder'
+proxy-reminder() {
+  echo 'ACTIVATE PROXY                      : proxy_on'
+  echo 'DISABLE PROXY(SBT PROXY DISABLED)   : proxy_off'
+  echo 'DISABLE SBT PROXY                   : sbt_proxy false'
+}
+
 echo ''
 # ============================================
 # -1. GLOBAL VARIABLES
@@ -173,7 +180,7 @@ sbt_proxy() {
   fi
 }
 
-proxy() {
+proxy_on() {
   local airport=/System/Library/PrivateFrameworks/Apple80211.framework
   local command=/Versions/Current/Resources/airport
 
@@ -223,7 +230,7 @@ proxy_off() {
   sbt_proxy false
 }
 
-proxy
+proxy_on
 
 # ============================================
 # 1. ENVIRONMENT CONFIGURATION

@@ -12,6 +12,7 @@ RECIPES=(
     git
     git-extras          # Extra commands like git ignore
     go
+    hadoop              # Collection with hdfs, mapreduce...
     jq                  # Command line Json processor
     kafka               # Stream processing in RT
     kubectl             # Kubernetes CL
