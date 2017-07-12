@@ -1,6 +1,7 @@
 #! /bin/bash
 
 RECIPES=(
+    apache-spark        # Engine for large-scale data processing
     ansible             # Automation scripting for VM
     archey              # Apple logo on shell startup
     autoconf

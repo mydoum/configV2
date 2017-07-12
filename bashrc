@@ -53,20 +53,31 @@ function token() {
 export PASSWORD=$password
 
 echo '[WORKSPACES]'
-echo 'phenix-workspace'
+echo 'phenix-local-workspace'
+echo 'phenix-docker-workspace'
 echo 'crm-workspace'
 echo ''
 
-phenix-workspace-start() {
-  sleep 4
+phenix-local-workspace-start() {
   echo '[START] Initializing the workspace'
   zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties & kafka-server-start /usr/local/etc/kafka/server.properties
 }
 
-phenix-workspace-stop() {
+phenix-local-workspace-stop() {
   echo '[STOP] zookeeper & kafka stopped'
   kafka-server-stop /usr/local/etc/kafka/server.properties
   zookeeper-server-stop /usr/local/etc/kafka/zookeeper.properties
+}
+
+phenix-docker-workspace-start() {
+  echo '[START] Docker images'
+  sourceb
+  cd $HOME/Projects/transactions-extractor/ && docker-compose up
+}
+
+phenix-docker-workspace-stop() {
+  echo '[STOP] Docker images'
+  cd $HOME/Projects/transactions-extractor/ && docker-compose down
 }
 
 crm-workspace-start() {
@@ -104,6 +115,11 @@ kafka-reminder() {
 
 alias km=kafka-reminder
 
+echo 'hadoop-reminder'
+hadoop-reminder() {
+  echo 'CONF  : /usr/local/Cella/hadoop/2.X.X/'
+}
+
 echo 'sbt-reminder'
 sbt-reminder() {
   echo 'LIST PROJECTS   : projects'
@@ -115,6 +131,18 @@ proxy-reminder() {
   echo 'ACTIVATE PROXY                      : proxy_on'
   echo 'DISABLE PROXY(SBT PROXY DISABLED)   : proxy_off'
   echo 'DISABLE SBT PROXY                   : sbt_proxy false'
+}
+
+echo 'docker-reminder'
+docker-reminder() {
+  echo 'launch SBT command  : docker-compose exec --user $PHENIX_USER_NAME --privileged build sbt -v it:test'
+  echo 'Enter in container  : docker exec -ti <docker ID> /bin/bash'
+}
+
+echo 'phenix-reminder'
+phenix-reminder() {
+  echo 'HDFS/Docker/CMDS: /usr/bin'
+  echo 'HDFS/Docker/List files: /usr/bin/hdfs dfs -ls -R /user'
 }
 
 echo ''

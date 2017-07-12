@@ -19,3 +19,5 @@ export JDK_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
 # =============== TERADATA ===================
 export PATH="/Library/Application Support/teradata/client/16.00/bin":$PATH
 
+# ================= SPARK ====================
+export SPARK_LOCAL_IP=127.0.0.1
