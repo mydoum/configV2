@@ -6,6 +6,7 @@ RECIPES=(
     archey              # Apple logo on shell startup
     autoconf
     automake
+    avro-tools          # Toolbox for avro file management
     bash
     bash-completion
     colordiff
