@@ -17,14 +17,17 @@
 
 echo '[INFO] Bash reminders'
 echo '!string : execute the last command containing string'
+echo 'top : launch gtop a sexy node application'
 echo ''
 
 # ============================================
 # -4. APPLICATIONS REMINDER
 # ============================================
 echo '[INFO] App reminders'
-echo 'TLDR  : show compact documentation of your app'
-echo 'PIDOF : get pid of your app'
+echo 'IMGCAT : display image in command line'
+echo 'PIDOF  : get pid of your app'
+echo 'TLDR   : show compact documentation of your app'
+
 echo ''
 
 # ============================================
@@ -110,6 +113,7 @@ kafka-reminder() {
   echo 'KAFKA DATA      : /usr/local/var/lib/kafka-logs'
   echo 'CREATE          : kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test'
   echo 'LIST TOPICS     : kafka-topics --list --zookeeper localhost:2181'
+  echo 'ON DOCKER PHENIX: /opt/kafka_2.11-0.8.2.2/bin/kafka-topics.sh --list --zookeeper kafka:2181/kafka'
   echo 'CONSUME         : kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning'
 }
 
@@ -122,8 +126,9 @@ hadoop-reminder() {
 
 echo 'sbt-reminder'
 sbt-reminder() {
-  echo 'LIST PROJECTS   : projects'
-  echo 'SELECT PROJECT: : project projectname'
+  echo 'LIST PROJECTS       : projects'
+  echo 'SELECT PROJECT:     : project projectname'
+  echo 'EXECUTE SINGLE IT TEST : sbt "it:testOnly -- -n tagName'
 }
 
 echo 'proxy-reminder'
@@ -135,14 +140,17 @@ proxy-reminder() {
 
 echo 'docker-reminder'
 docker-reminder() {
-  echo 'launch SBT command  : docker-compose exec --user $PHENIX_USER_NAME --privileged build sbt -v it:test'
-  echo 'Enter in container  : docker exec -ti <docker ID> /bin/bash'
+  echo 'launch SBT command      : docker-compose exec --user $PHENIX_USER_NAME --privileged build sbt -v it:test'
+  echo 'Enter in container      : docker exec -ti <docker ID> /bin/bash'
+  echo 'Remove images instances : docker rm -f $(docker ps -aq)'
 }
 
-echo 'phenix-reminder'
-phenix-reminder() {
+echo 'hdfs-reminder'
+hdfs-reminder() {
+  echo 'HDFS/Docker: docker-compose exec --privileged hdfs /bin/bash'
   echo 'HDFS/Docker/CMDS: /usr/bin'
   echo 'HDFS/Docker/List files: /usr/bin/hdfs dfs -ls -R /user'
+  echo 'HDFS/Docker/rm files: HADOOP_USER_NAME=hdfs hdfs dfs -rm -r -f /user/phenix'
 }
 
 echo ''
@@ -459,7 +467,14 @@ killapp () {
 alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
 
 #               monitor:  Real time monitoring
-alias monitor='top -R -F -s 10 -o rsize -s 2'
+alias monitor='/usr/bin/top -R -F -s 10 -o rsize -s 2'
+
+#               gtop: https://github.com/aksakalli/gtop
+# You can sort the process table by pressing
+# p: Process Id
+# c: CPU usage
+# m: Memory usage
+alias top=gtop
 
 #               my_ps:    List processes owned by my user
 my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }

@@ -13,6 +13,7 @@ if is_confirmed; then
   npm install gulp -g
   npm install jade -g
   npm install ember-cli -g
+  npm install gtop -g
 fi
 
 notice "Installing meteor"
