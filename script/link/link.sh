@@ -3,12 +3,19 @@
 #   .linking files
 # ==================================================================================
 # link.sh
+FILES_TO_LINK=("bashrc"
+"bash_archive"
+"screenrc"
+"bash_profile"
+"bash_env"
+"dircolors")
 
 notice "Configuring Bash"
-ln -fs $DOTFILES_DIR/bashrc ~/.bashrc
-ln -fs $DOTFILES_DIR/bash_profile ~/.bash_profile
-ln -fs $DOTFILES_DIR/bash_env ~/.bash_env
-ln -fs $DOTFILES_DIR/dircolors ~/.dircolors
+for ((i = 0; i < ${#FILES_TO_LINK[@]}; i++))
+do
+    info "${FILES_TO_LINK[$i]} linked to HOME directory"
+    ln -fs $DOTFILES_DIR/${FILES_TO_LINK[$i]} ~/.${FILES_TO_LINK[$i]}
+done
 
 notice "Configuring the readline"
 ln -fs $DOTFILES_DIR/inputrc ~/.inputrc

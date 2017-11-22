@@ -1,7 +1,7 @@
 # My bashrc personal configuration
 # ---------------------------------------------------------------------------
 
-# Sections:
+# Sections
 # 1. Environment Configuration
 # 2. Backup history
 # 3. Make Terminal Better (remapping defaults and adding functionality)
