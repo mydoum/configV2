@@ -43,15 +43,14 @@ echo ''
 # -2. TEMPORARY COMMANDS
 # ============================================
 
+
 # Add cloud key on ssh agent
 # ssh-add ~/.ssh/cloud
 
 #################
 # Usage : token prod|preprod|dev
 #################
-function token() {
-  ~/Script/token.sh $1
-}
+alias cur='cd /Users/alonso/Projects/accor/ah-bot-dev'
 
 export PASSWORD=$password
 
@@ -133,6 +132,11 @@ WHITE="\e[39m"
 if [ -f ~/.bash_private ]; then
    source ~/.bash_private
 fi
+
+echo '[PRIVATE REMINDERS]'
+echo 'preprod-to-local(): $1 -> filename'
+echo 'send-to-preprod(): $1 -> filepath'
+
 
 # ex: $user, $password, proxy_ip, $proxy_port
 
