@@ -50,7 +50,9 @@ echo ''
 #################
 # Usage : token prod|preprod|dev
 #################
-alias cur='cd /Users/alonso/Projects/accor/ah-bot-dev'
+alias cur='cd /Users/alonso/Projects/staffme/staffme_v2_bp'
+alias curtog='cd /Users/alonso/Projects/together/TOG-POC1'
+alias python='/usr/local/bin/python3'
 
 export PASSWORD=$password
 
@@ -134,8 +136,9 @@ if [ -f ~/.bash_private ]; then
 fi
 
 echo '[PRIVATE REMINDERS]'
-echo 'preprod-to-local(): $1 -> filename'
-echo 'send-to-preprod(): $1 -> filepath'
+echo 'sshk NAME'
+echo 'scp_remote_file'
+echo 'scp_local_file'
 
 
 # ex: $user, $password, proxy_ip, $proxy_port
@@ -147,7 +150,8 @@ echo 'send-to-preprod(): $1 -> filepath'
 DEFAULTPATH=/usr/bin:/bin:/usr/sbin:/sbin
 BREWPATH=/usr/local/bin:/usr/local/sbin
 LATEXPATH=/Library/TeX/texbin
-export PATH=$BREWPATH:$DEFAULTPATH:$GOPATH/bin:$LATEXPATH:$AZUREPATH
+#export PATH=$BREWPATH:$DEFAULTPATH:$GOPATH/bin:$LATEXPATH:$AZUREPATH
+export PATH=$DEFAULTPATH:$BREWPATH
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -229,10 +233,7 @@ shopt -s checkwinsize
 # With --color=auto, ls uses LS_COLORS environment varaible
 test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" \
     || eval "$(gdircolors -b)"
-alias ls='${LS} -F --color=auto'
-alias l='ls -Fh'
-alias la='ls -lva'
-alias ll='ls -lvh'
+alias ls='${LS} -lvhaF --color=auto'
 
 # ============= Aliases ===============
 
@@ -271,7 +272,7 @@ fi
 #   4. FUNCTIONS
 # ============================================
 
-cd() { builtin cd "$@"; ll; }
+cd() { builtin cd "$@"; ls; }
 mcd() { mkdir -p $1; cd $1; }
 
 #               extract:  Extract most know archives with one command
@@ -368,3 +369,4 @@ else
     alias flushdns='/etc/init.d/nscd restart'
     #/etc/init.d/named restart
 fi
+export PATH=$BREWPATH:$PATH
