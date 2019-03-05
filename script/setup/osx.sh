@@ -90,10 +90,10 @@ function mainScript() {
 	function configureSSH() {
         notice "Configuring SSH"
 
-        if [[ -f "${HOME}/.ssh/id_rsa.pub" ]]; then
-           verbose "A public rsa key already exist"
+        if [[ -f "${HOME}/.ssh/id_ecdsa_main.pub" ]]; then
+           verbose "A public ecdsa key already exist"
         else
-            ssh-keygen -t rsa
+            ssh-keygen -f $HOME/.ssh/id_ecdsa_main.key -t ecdsa -b 521
             success "A SSH key generated"
         fi
 
@@ -185,13 +185,9 @@ function mainScript() {
   	}
 
   	function installHomebrewTaps() {
-  	    brew tap homebrew/dupes
-  	    brew tap homebrew/versions
   	    brew install argon/mas/mas
   	    brew tap argon/mas
   	    brew tap caskroom/cask
-  	    brew tap caskroom/fonts
-  	    brew tap caskroom/versions
     }
 
 	function isAppInstalled() {

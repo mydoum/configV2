@@ -2,22 +2,15 @@
 
 RECIPES=(
     alfred              # Spotlight like with workflows
-    android-studio      # Android IDE from Jetbrain
-    andy                # Best android simulator
     anki                # Flashcard learning system
     arq                 # Backup manager
     dash                # Programming documentation manager
-    datagrip
     docker
     docker-toolbox
-    firefox
     flux                # Change screen color depending on the time
     google-chrome
     intellij-idea
-    iterm2
-    java
     karabiner-elements  # Karabiner doesn't work on Sierra
-    mactex              # All elements needed to write in LateX
     oversight           # Protect the use of webcam and micros
     phpstorm
     postman
@@ -27,12 +20,11 @@ RECIPES=(
     qlstephen           # quicklook README INSTALL Makefile
     quicklook-csv
     quicklook-json
+    slack
     spectacle           # Move and resize windows with ease
     skype
     teamviewer
     utorrent
-    vagrant
-    vagrant-manager
     virtualbox
     vlc
     webpquicklook

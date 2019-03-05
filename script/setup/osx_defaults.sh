@@ -7,7 +7,7 @@
 notice "Configuring the OSX default settings"
 
 # Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
+# settings were about to change
 osascript -e 'tell application "System Preferences" to quit'
 
 # ========================
@@ -27,11 +27,12 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write -g com.apple.keyboard.fnState -bool true
 
 # ========================
-# Pad
+# Login
 # ========================
 
-# Change pad scroll direction
-defaults write -g com.apple.swipescrolldirection -bool FALSE
+# Write a login message
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string 'Discipline is the key'
+# sudo defaults delete /Library/Preferences/com.apple.loginwindow LoginwindowText
 
 # ========================
 # Screen
@@ -43,12 +44,6 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Set highlight color to red
 defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.733333 0.721569"
-
-# Use dark menu bar and dock
-defaults write NSGlobalDomain AppleInterfaceStyle Dark
-
-# Use Appearance Graphite
-defaults write NSGlobalDomain AppleAquaColorVariant 6
 
 # Indicate Hidden App Icons on Dock
 defaults write com.apple.dock showhidden -bool TRUE; killall Dock
@@ -103,17 +98,11 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Security
 # ========================
 
-# Enable firewall. Possible values:
-#   0 = off
-#   1 = on for specific sevices
-#   2 = on for essential services
-sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
-
-# Disable guest account login
-sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
-
 # Enable Secure Keyboard Entry in Terminal.app
 # See: https://security.stackexchange.com/a/47786/8918
 defaults write com.apple.terminal SecureKeyboardEntry -bool true
+
+# Enable crash reporting as notifications
+defaults write com.apple.CrashReporter UseUNC 1
 
 success "Done configuring the OSX default settings"

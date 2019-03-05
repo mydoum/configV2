@@ -47,7 +47,7 @@ endif
 " It has been tested on OSX, if linux try to delete the termcolors=256 line
 let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized
+colorscheme default
 
 " show line numbers
 set number
