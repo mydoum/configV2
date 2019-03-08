@@ -4,6 +4,7 @@ RECIPES=(
     alfred              # Spotlight like with workflows
     anki                # Flashcard learning system
     arq                 # Backup manager
+    evernote
     dash                # Programming documentation manager
     docker
     docker-toolbox
